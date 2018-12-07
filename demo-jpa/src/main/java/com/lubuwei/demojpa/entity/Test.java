@@ -1,7 +1,5 @@
 package com.lubuwei.demojpa.entity;
 
-
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,8 +9,8 @@ import java.io.Serializable;
 @Table(name = "lu_test")
 public class Test implements Serializable {
     @Id
-    Long id;
-    String name;
+    private Long id;
+    private String name;
 
     public Long getId() {
         return id;

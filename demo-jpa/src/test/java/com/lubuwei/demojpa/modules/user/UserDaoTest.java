@@ -1,7 +1,6 @@
-package com.lubuwei.demojpa.repository;
+package com.lubuwei.demojpa.modules.user;
 
-import com.lubuwei.demojpa.dao.TestDao;
-import org.junit.Assert;
+import com.lubuwei.demojpa.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +13,14 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestRepositoryTest {
-
+public class UserDaoTest {
     @Autowired
-    TestDao testDao;
+    UserDao userDao;
 
     @Test
     public void testGeneralMethod(){
-        List<com.lubuwei.demojpa.entity.Test> list = testDao.findAll();
-        String id = list.get(0).getName();
-        assertEquals(id, "test link 1");
+        List<User> list = userDao.findAll();
+        int size = list.size();
+        assertEquals(size, 0);
     }
 }
