@@ -1,4 +1,4 @@
-package com.lubuwei.demojpa;
+package com.lubuwei.demojpa.bootstrap;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
