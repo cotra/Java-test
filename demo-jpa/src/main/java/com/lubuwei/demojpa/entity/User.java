@@ -1,15 +1,16 @@
 package com.lubuwei.demojpa.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "lu_user")
 public class User {
+
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long uid;
+
     private String realName;
     private String nickname;
     private String mobile;
@@ -18,12 +19,12 @@ public class User {
     private Timestamp createTime;
     private Integer isDelete;
 
-    public Long getId() {
-        return id;
+    public Long getUid() {
+        return uid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
 
     public String getRealName() {

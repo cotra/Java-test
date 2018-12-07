@@ -1,6 +1,7 @@
 package com.lubuwei.demojpa.modules.user;
 
 import com.lubuwei.demojpa.entity.User;
+import com.lubuwei.demojpa.utils.TimeUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class UserServiceTest {
     @Test
     public void save() {
         User user = new User();
+        user.setMobile("12312345");
+        user.setPassword("666");
+        user.setCreateTime(TimeUtils.dateToSqlTimestamp());
+        user.setIsDelete(0);
         userService.save(user);
     }
 }

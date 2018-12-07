@@ -13,6 +13,7 @@ public class UserService {
     private UserDao userDao;
 
     public Api<Long> save(User user) {
+        userDao.save(user);
         // 检查是否已存在同手机号和邮箱的用户, 没有就添加
 //        if (drugMapper.findByCDANandCDSC(drug).size() == 0) {
 //            drug.setCreateTime(TimeUtils.dateToSqlTimestamp());
