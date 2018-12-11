@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="book.life.modules.group.GroupMapper">
+    <!--结果map-->
+    <resultMap id="CellResultMap" type="book.life.modules.group.domain.ResGroup">
+        <id column="gid" property="gid" jdbcType="INTEGER"/>
+        <id column="group_name" property="groupName" jdbcType="VARCHAR"/>
+        <id column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--sql-->
+    <sql id="sql_table">
+        lb_group_dict
+    </sql>
+    <sql id="sql_cell">
+        gid, group_name, create_time
+    </sql>
+    <!--save-->
+    <insert id="save" parameterType="Group" useGeneratedKeys="true"
+            keyProperty="gid">
+        insert into
+        <include refid="sql_table"/>
+        (group_name, create_time)
+        values (#{groupName}, #{createTime})
+    </insert>
+    <!--findByGroupName-->
+    <select id="findByGroupName" parameterType="Group" resultMap="CellResultMap">
+        select
+        <include refid="sql_cell"/>
+        from
+        <include refid="sql_table"/>
+        where group_name = #{groupName} and is_delete = 0
+    </select>
+    <!--find-->
+    <select id="find" parameterType="Group" resultMap="CellResultMap">
+        select
+        <include refid="sql_cell"/>
+        from
+        <include refid="sql_table"/>
+        <where>
+            is_delete = 0
+        </where>
+    </select>
+</mapper>

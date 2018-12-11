@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="book.life.modules.staff.StaffMapper">
+    <!--结果map-->
+    <resultMap id="CellResultMap" type="book.life.modules.staff.domain.ResStaff">
+        <id column="sid" property="sid" jdbcType="BIGINT" />
+        <id column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <id column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <id column="email" property="email" jdbcType="VARCHAR"/>
+        <id column="gid" property="gid" jdbcType="INTEGER"/>
+        <id column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <id column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--sql-->
+    <sql id="sql_table">
+        from lb_staff
+    </sql>
+    <sql id="sql_cell">
+        sid, real_name, mobile, email, gid, create_time, last_login_time
+    </sql>
+    <!--save-->
+    <insert id="save" parameterType="Staff" useGeneratedKeys="true"
+            keyProperty="sid">
+        insert into lb_staff (real_name, mobile, email, password, gid, create_time)
+        values (#{realName}, #{mobile}, #{email}, #{password}, #{gid}, #{createTime})
+    </insert>
+    <!--findByMobile-->
+    <select id="findByMobile" parameterType="Staff" resultMap="CellResultMap">
+        select
+        <include refid="sql_cell"/>
+        <include refid="sql_table"/>
+        where mobile = #{mobile} and is_delete = 0
+    </select>
+    <!--find-->
+    <select id="find" parameterType="Staff" resultMap="CellResultMap">
+        select
+        <include refid="sql_cell"/>
+        <include refid="sql_table"/>
+        <where>
+            is_delete = 0
+            <if test="mobile != null and mobile != ''">
+                AND mobile = #{mobile}
+            </if>
+            <if test="realName != null and realName != ''">
+                AND real_name like #{realName}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="book.life.modules.drug.DrugMapper">
+    <!--结果map-->
+    <resultMap id="CellResultMap" type="book.life.modules.drug.domain.ResDrug">
+        <id column="did" property="did" jdbcType="INTEGER"/>
+        <id column="CDAN" property="CDAN" jdbcType="VARCHAR"/>
+        <id column="CDSC" property="CDSC" jdbcType="VARCHAR"/>
+        <id column="drug_name" property="drugName" jdbcType="VARCHAR"/>
+        <id column="company" property="company" jdbcType="VARCHAR"/>
+        <id column="norm" property="norm" jdbcType="VARCHAR"/>
+        <id column="approval_date" property="approvalDate" jdbcType="DATE"/>
+        <id column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--sql-->
+    <sql id="sql_table">
+        lb_drug
+    </sql>
+    <sql id="sql_cell">
+        did, CDAN, CDSC, drug_name, company, norm, approval_date, create_time
+    </sql>
+    <!--save-->
+    <insert id="save" parameterType="Drug" useGeneratedKeys="true"
+            keyProperty="did">
+        insert into
+        <include refid="sql_table"/>
+        (CDAN, CDSC, drug_name, company, norm, approval_date, create_time)
+        values (#{CDAN}, #{CDSC}, #{drugName}, #{company}, #{norm}, #{approvalDate}, #{createTime})
+    </insert>
+    <!--findByCDANandCDSC-->
+    <select id="findByCDANandCDSC" parameterType="Drug" resultMap="CellResultMap">
+        select
+        <include refid="sql_cell"/>
+        from
+        <include refid="sql_table"/>
+        where CDAN = #{CDAN} and CDSC = #{CDSC} and is_delete = 0
+    </select>
+    <!--find-->
+    <select id="find" parameterType="Drug" resultMap="CellResultMap">
+        select
+        <include refid="sql_cell"/>
+        from
+        <include refid="sql_table"/>
+        <where>
+            is_delete = 0
+        </where>
+    </select>
+</mapper>
