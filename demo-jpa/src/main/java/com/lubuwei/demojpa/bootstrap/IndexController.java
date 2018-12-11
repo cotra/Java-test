@@ -1,18 +1,15 @@
 package com.lubuwei.demojpa.bootstrap;
 
+import com.lubuwei.demojpa.api.Api;
+import com.lubuwei.demojpa.api.ApiGenerator;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class IndexController {
 
-    @RequestMapping("")
-    public String index() {
-        return "api service is running";
-    }
-
     @RequestMapping("/")
-    public String main() {
-        return "api service is running";
+    public Api<String> index() {
+        return ApiGenerator.ok("api service is running.");
     }
 }
