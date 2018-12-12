@@ -50,4 +50,13 @@ public class ApiGenerator {
         Api<String> api = gen(code.getCode(), code.getMsg(), "");
         return api;
     }
+
+    /**
+     * 失败返回,自定义消息
+     */
+    public static final Api<String> fail(String msg) {
+        String code = Code.FAILURE.getCode();
+        Api<String> api = gen(code, msg, "");
+        return api;
+    }
 }

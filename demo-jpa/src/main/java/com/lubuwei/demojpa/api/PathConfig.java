@@ -5,6 +5,6 @@ public class PathConfig {
     private static final String PREFIX = "api";
     // 地址
     private static final String API_V1 = PREFIX + "/" + "v1"+ "/";
-    // 一级资源地址
+    // 授权
     public static final String API_ACCESS = API_V1 + "access" + "/";
 }

@@ -1,5 +1,7 @@
 package com.lubuwei.demojpa.entity;
 
+import com.lubuwei.demojpa.utils.TimeUtils;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -16,8 +18,8 @@ public class User {
     private String mobile;
     private String email;
     private String password;
-    private Timestamp createTime;
-    private Integer isDelete;
+    private Timestamp createTime = TimeUtils.letDateToSqlTimestamp();
+    private Integer isDelete = 0;
 
     public Long getUid() {
         return uid;
