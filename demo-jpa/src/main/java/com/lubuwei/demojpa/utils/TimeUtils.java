@@ -12,7 +12,7 @@ public class TimeUtils {
     /**
      * Date转sql的Timestamp
      */
-    public static Timestamp dateToSqlTimestamp() {
+    public static Timestamp letDateToSqlTimestamp() {
         Date date = new Date();
         return new Timestamp(date.getTime());
     }

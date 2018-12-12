@@ -21,7 +21,7 @@ public class UserServiceTest {
         User user = new User();
         user.setMobile("12312345");
         user.setPassword("666");
-        user.setCreateTime(TimeUtils.dateToSqlTimestamp());
+        user.setCreateTime(TimeUtils.letDateToSqlTimestamp());
         user.setIsDelete(0);
         userService.save(user);
     }

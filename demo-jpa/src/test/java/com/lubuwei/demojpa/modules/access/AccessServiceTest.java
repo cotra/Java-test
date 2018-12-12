@@ -20,8 +20,11 @@ public class AccessServiceTest {
     @Test
     public void adminLogin() {
         User user = new User();
-        user.setMobile("777");
-
-        accessService.adminLogin(user);
+        user.setMobile("77722277745");
+        user.setEmail("sdfsdf");
+        user.setPassword("123123123123");
+        user.setIsDelete(0);
+        Long login = accessService.adminLogin(user);
+        System.out.println(login);
     }
 }

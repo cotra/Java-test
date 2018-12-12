@@ -1,9 +1,8 @@
 package com.lubuwei.demojpa.modules.access;
 
-import com.lubuwei.demojpa.api.Api;
-import com.lubuwei.demojpa.api.ApiGenerator;
 import com.lubuwei.demojpa.entity.User;
 import com.lubuwei.demojpa.dao.UserDao;
+import com.lubuwei.demojpa.utils.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -17,21 +16,25 @@ public class AccessService {
     @Autowired
     private UserDao userDao;
 
-    public Api<Long> adminLogin(User user) {
+    // 管理员查询条件
+    private ExampleMatcher adminLimit() {
+        return ExampleMatcher.matching()
+                .withMatcher("mobile", ExampleMatcher.GenericPropertyMatchers.exact())
+                .withIgnorePaths("email");
+    }
 
-        ExampleMatcher matcher = ExampleMatcher.matching();
-
-        Example<User> example = Example.of(user, matcher);
+    // 注册一个管理员
+    public Long adminLogin(User user) {
+        Example<User> example = Example.of(user, adminLimit());
 
         List<User> list = userDao.findAll(example);
-        System.out.println(list.size());
-        // 检查是否已存在同手机号和邮箱的用户, 没有就添加
-//        if (drugMapper.findByCDANandCDSC(drug).size() == 0) {
-//            drug.setCreateTime(TimeUtils.dateToSqlTimestamp());
-//            // 保存
-//            drugMapper.save(drug);
-//            return drug.getDid();
-//        }
-        return ApiGenerator.ok(1L);
+        // 检查是否已存在同手机号的记录, 没有就添加
+        if (list.size() == 0) {
+            user.setCreateTime(TimeUtils.letDateToSqlTimestamp());
+            // 保存
+            userDao.save(user);
+            return user.getUid();
+        }
+        return 0L;
     }
 }
