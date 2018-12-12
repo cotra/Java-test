@@ -3,8 +3,8 @@ package com.lubuwei.demojpa.modules.access;
 
 import com.lubuwei.demojpa.api.Api;
 import com.lubuwei.demojpa.api.ApiGenerator;
-import com.lubuwei.demojpa.constant.Flag;
 import com.lubuwei.demojpa.entity.User;
+import com.lubuwei.demojpa.modules.access.domain.Flag;
 import org.springframework.beans.BeanUtils;
 
 class AccessLogic {
@@ -15,8 +15,8 @@ class AccessLogic {
     }
 
     static Api<String> registerApi(Long flag) {
-        if (flag == Flag.CREATE_FAIL) {
-            return ApiGenerator.fail();
+        if (flag == Flag.MOBILE_EXISTS) {
+            return ApiGenerator.fail("手机号已经被注册");
         }
         return ApiGenerator.ok(flag.toString());
     }

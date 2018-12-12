@@ -1,8 +1,8 @@
 package com.lubuwei.demojpa.modules.access;
 
-import com.lubuwei.demojpa.constant.Flag;
 import com.lubuwei.demojpa.entity.User;
 import com.lubuwei.demojpa.dao.UserDao;
+import com.lubuwei.demojpa.modules.access.domain.Flag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -34,6 +34,6 @@ public class AccessService {
             userDao.save(user);
             return user.getUid();
         }
-        return Flag.CREATE_FAIL;
+        return Flag.MOBILE_EXISTS;
     }
 }

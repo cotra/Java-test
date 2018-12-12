@@ -7,8 +7,7 @@ public enum Code {
     // 成功
     SUCCESS("0000", "操作成功"),
     // 失败
-    FAILURE("1000", "操作失败"),
-    FAILURE_HAS_MOBILE("1001", "该手机已被注册")
+    FAILURE("1000", "操作失败")
     // 其它
     ;
 
