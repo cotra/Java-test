@@ -18,8 +18,10 @@ public class User {
     private String mobile;
     private String email;
     private String password;
-    private Timestamp createTime = TimeUtils.letDateToSqlTimestamp();
-    private Integer isDelete = 0;
+    private Timestamp createTime;
+
+    @Column(insertable = false)
+    private Integer isDelete;
 
     public Long getUid() {
         return uid;

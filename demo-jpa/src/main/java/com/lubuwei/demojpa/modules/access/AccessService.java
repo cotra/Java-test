@@ -3,6 +3,7 @@ package com.lubuwei.demojpa.modules.access;
 import com.lubuwei.demojpa.entity.User;
 import com.lubuwei.demojpa.dao.UserDao;
 import com.lubuwei.demojpa.modules.access.domain.Flag;
+import com.lubuwei.demojpa.utils.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -20,7 +21,7 @@ public class AccessService {
     private ExampleMatcher userLimit() {
         return ExampleMatcher.matching()
                 .withMatcher("mobile", ExampleMatcher.GenericPropertyMatchers.exact())
-                .withIgnorePaths("password", "createTime", "isDelete");
+                .withIgnorePaths("password");
     }
 
     // 注册一个用户
@@ -30,6 +31,8 @@ public class AccessService {
         List<User> list = userDao.findAll(example);
         // 检查是否已存在同手机号的记录, 没有就添加
         if (list.size() == 0) {
+            // 动态写入
+            user.setCreateTime(TimeUtils.letDateToSqlTimestamp());
             // 保存
             userDao.save(user);
             return user.getUid();

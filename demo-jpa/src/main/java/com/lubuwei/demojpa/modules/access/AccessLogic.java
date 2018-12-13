@@ -18,6 +18,6 @@ class AccessLogic {
         if (flag == Flag.MOBILE_EXISTS) {
             return ApiGenerator.fail("手机号已经被注册");
         }
-        return ApiGenerator.ok(flag.toString());
+        return ApiGenerator.ok();
     }
 }

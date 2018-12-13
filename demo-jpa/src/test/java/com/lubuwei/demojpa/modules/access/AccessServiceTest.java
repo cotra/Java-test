@@ -1,7 +1,6 @@
-package com.lubuwei.demojpa.modules.user;
+package com.lubuwei.demojpa.modules.access;
 
 import com.lubuwei.demojpa.entity.User;
-import com.lubuwei.demojpa.utils.TimeUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +11,16 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceTest {
+public class AccessServiceTest {
+
     @Autowired
-    UserService userService;
+    AccessService accessService;
 
     @Test
-    public void save() {
-        User user = new User();
-        user.setMobile("12312345");
-        user.setPassword("666");
-        user.setCreateTime(TimeUtils.letDateToSqlTimestamp());
-        user.setIsDelete(0);
-        userService.save(user);
+    public void register() {
+//        User user = new User();
+//        user.setMobile("12");
+//        user.setPassword("666");
+//        accessService.register(user);
     }
 }
