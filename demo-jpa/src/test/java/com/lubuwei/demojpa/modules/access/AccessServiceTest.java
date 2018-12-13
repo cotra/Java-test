@@ -1,12 +1,12 @@
 package com.lubuwei.demojpa.modules.access;
 
 import com.lubuwei.demojpa.entity.User;
+import com.lubuwei.demojpa.modules.access.domain.Flag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -18,9 +18,10 @@ public class AccessServiceTest {
 
     @Test
     public void register() {
-//        User user = new User();
-//        user.setMobile("12");
-//        user.setPassword("666");
-//        accessService.register(user);
+        User user = new User();
+        user.setMobile("15012345678");
+        user.setPassword("123456");
+        Long register = accessService.register(user);
+        assertEquals(register, Flag.MOBILE_EXISTS);
     }
 }

@@ -22,4 +22,10 @@ public class AccessController {
         Long register = accessService.register(AccessLogic.ToUser(req));
         return AccessLogic.registerApi(register);
     }
+
+    @PostMapping("login")
+    public Api<String> login (@RequestBody @Validated UserRegister req) {
+        Long register = accessService.register(AccessLogic.ToUser(req));
+        return AccessLogic.registerApi(register);
+    }
 }
