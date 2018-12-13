@@ -3,14 +3,14 @@ package com.lubuwei.demojpa.modules.access.dto;
 import com.lubuwei.demojpa.entity.User;
 
 public class UserLogin {
-    private Long flag;
+    private Integer flag;
     private User user;
 
-    public Long getFlag() {
+    public Integer getFlag() {
         return flag;
     }
 
-    public void setFlag(Long flag) {
+    public void setFlag(Integer flag) {
         this.flag = flag;
     }
 

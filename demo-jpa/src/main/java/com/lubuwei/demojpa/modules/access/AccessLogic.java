@@ -4,9 +4,11 @@ package com.lubuwei.demojpa.modules.access;
 import com.lubuwei.demojpa.api.Api;
 import com.lubuwei.demojpa.api.ApiGenerator;
 import com.lubuwei.demojpa.entity.User;
+import com.lubuwei.demojpa.modules.access.domain.UserRegisterReq;
 import com.lubuwei.demojpa.modules.access.dto.Flag;
 import com.lubuwei.demojpa.modules.access.domain.UserLoginRes;
 import com.lubuwei.demojpa.modules.access.dto.UserLogin;
+import com.lubuwei.demojpa.modules.access.dto.UserRegister;
 import org.springframework.beans.BeanUtils;
 
 class AccessLogic {
@@ -16,20 +18,26 @@ class AccessLogic {
         return user;
     }
 
-    static Api<String> registerApi(Long flag) {
+    static Api<UserRegisterReq> registerApi(UserRegister dto) {
+        Integer flag = dto.getFlag();
         if (flag == Flag.MOBILE_EXISTS) {
             return ApiGenerator.fail("手机号已经被注册");
         }
-        return ApiGenerator.ok();
+        // 返回参数
+        UserRegisterReq req = new UserRegisterReq(dto.getUid());
+        return ApiGenerator.ok(req);
     }
 
-    static Api<UserLoginRes> loginApi(UserLogin userLogin) {
-        Long flag = userLogin.getFlag();
+    static Api<UserLoginRes> loginApi(UserLogin dto) {
+        Integer flag = dto.getFlag();
         if (flag == Flag.MOBILE_MORE_ONE) {
             return ApiGenerator.fail("用户查询失败");
         }
         if (flag == Flag.MOBILE_NO) {
-            return ApiGenerator.fail("该用户不存在");
+            return ApiGenerator.fail("该用户并不存在");
+        }
+        if (flag == Flag.PASSWORD_ERROR) {
+            return ApiGenerator.fail("密码错误");
         }
         if (flag == Flag.OK) {
 

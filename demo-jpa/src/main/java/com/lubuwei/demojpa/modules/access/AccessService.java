@@ -4,6 +4,7 @@ import com.lubuwei.demojpa.entity.User;
 import com.lubuwei.demojpa.dao.UserDao;
 import com.lubuwei.demojpa.modules.access.dto.Flag;
 import com.lubuwei.demojpa.modules.access.dto.UserLogin;
+import com.lubuwei.demojpa.modules.access.dto.UserRegister;
 import com.lubuwei.demojpa.utils.MD5Utils;
 import com.lubuwei.demojpa.utils.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,8 @@ public class AccessService {
     }
 
     // 注册一个用户
-    public Long register(User user) {
+    public UserRegister register(User user) {
+        UserRegister dto = new UserRegister();
         // 查询
         List<User> list = userDao.findAll(registerExample(user));
         // 检查是否已存在同手机号的记录, 没有就添加
@@ -40,9 +42,11 @@ public class AccessService {
             user.setCreateTime(TimeUtils.letDateToSqlTimestamp());
             // 保存
             userDao.save(user);
-            return user.getUid();
+            dto.setUid(user.getUid());
+            return dto;
         }
-        return Flag.MOBILE_EXISTS;
+        dto.setFlag(Flag.MOBILE_EXISTS);
+        return dto;
     }
 
     // 管理员查询条件
@@ -57,20 +61,35 @@ public class AccessService {
 
     // 登录
     public UserLogin login(User user, String code) {
-        UserLogin userLogin = new UserLogin();
+        UserLogin dto = new UserLogin();
         List<User> list = userDao.findAll(loginExample(user));
 
         int size = list.size();
         if (size > 1) {
-            userLogin.setFlag(Flag.MOBILE_MORE_ONE);
+            dto.setFlag(Flag.MOBILE_MORE_ONE);
+            return dto;
         }
         if (size == 0) {
-            userLogin.setFlag(Flag.MOBILE_NO);
+            dto.setFlag(Flag.MOBILE_NO);
+            return dto;
         }
         if (size == 1) {
             User info = list.get(0);
-            System.out.println(info);
+            if (checkPasswordMD5(user.getPassword(), info.getPassword())) {
+                System.out.println("成功");
+            } else {
+                dto.setFlag(Flag.PASSWORD_ERROR);
+                return dto;
+            }
         }
-        return userLogin;
+        return dto;
+    }
+
+    private boolean checkPasswordMD5(String req, String record) {
+        String md5 = MD5Utils.toMD5(req);
+        if(md5.equals(record)) {
+            return true;
+        }
+        return false;
     }
 }
