@@ -2,7 +2,11 @@ package com.lubuwei.demojpa.modules.access;
 
 import com.lubuwei.demojpa.api.Api;
 import com.lubuwei.demojpa.api.PathConfig;
+import com.lubuwei.demojpa.entity.User;
+import com.lubuwei.demojpa.modules.access.domain.UserLoginReq;
+import com.lubuwei.demojpa.modules.access.domain.UserLoginRes;
 import com.lubuwei.demojpa.modules.access.domain.UserRegister;
+import com.lubuwei.demojpa.modules.access.dto.UserLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,12 +24,14 @@ public class AccessController {
     @PostMapping("register")
     public Api<String> register (@RequestBody @Validated UserRegister req) {
         Long register = accessService.register(AccessLogic.ToUser(req));
-        return AccessLogic.registerApi(register);
+        Api<String> api = AccessLogic.registerApi(register);
+        return api;
     }
 
     @PostMapping("login")
-    public Api<String> login (@RequestBody @Validated UserRegister req) {
-        Long register = accessService.register(AccessLogic.ToUser(req));
-        return AccessLogic.registerApi(register);
+    public Api<UserLoginRes> login (@RequestBody @Validated UserLoginReq req) {
+        UserLogin userLogin = accessService.login(AccessLogic.ToUser(req), req.getCode());
+        Api<UserLoginRes> api = null;
+        return api;
     }
 }

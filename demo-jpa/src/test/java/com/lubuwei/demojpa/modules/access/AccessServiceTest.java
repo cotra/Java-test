@@ -1,7 +1,7 @@
 package com.lubuwei.demojpa.modules.access;
 
 import com.lubuwei.demojpa.entity.User;
-import com.lubuwei.demojpa.modules.access.domain.Flag;
+import com.lubuwei.demojpa.modules.access.dto.Flag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

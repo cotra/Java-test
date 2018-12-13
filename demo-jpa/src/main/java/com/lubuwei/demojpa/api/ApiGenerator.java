@@ -46,9 +46,9 @@ public class ApiGenerator {
     }
 
     // 失败返回,自定义信息
-    public static final Api<String> fail(String msg) {
+    public static final <T> Api<T> fail(String msg) {
         String code = Code.FAILURE.getCode();
-        Api<String> api = gen(code, msg, null);
+        Api<T> api = gen(code, msg, null);
         return api;
     }
 }
