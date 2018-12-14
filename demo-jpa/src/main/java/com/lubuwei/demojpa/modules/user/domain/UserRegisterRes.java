@@ -1,6 +1,8 @@
 package com.lubuwei.demojpa.modules.user.domain;
 
-public class UserRegisterRes {
+import java.io.Serializable;
+
+public class UserRegisterRes implements Serializable {
     private Long uid;
 
     public UserRegisterRes(Long uid) {

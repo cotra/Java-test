@@ -1,8 +1,9 @@
 package com.lubuwei.demojpa.modules.user.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class UserLoginRes {
+public class UserLoginRes implements Serializable {
     private Long uid;
     private String realName;
     private String nickname;

@@ -13,7 +13,6 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uid;
-
     private String realName;
     private String nickname;
     private String mobile;

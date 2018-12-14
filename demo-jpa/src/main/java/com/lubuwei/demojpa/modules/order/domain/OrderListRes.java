@@ -1,21 +1,12 @@
-package com.lubuwei.demojpa.entity;
+package com.lubuwei.demojpa.modules.order.domain;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-@Entity
-@Table(name = "lu_order")
-public class Order implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class OrderListRes implements Serializable {
     private Long oid;
     private String mobile;
     private Timestamp createTime;
-
-    @Column(insertable = false)
-    private Integer isDelete;
 
     public Long getOid() {
         return oid;
@@ -39,13 +30,5 @@ public class Order implements Serializable {
 
     public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
-    }
-
-    public Integer getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
     }
 }
