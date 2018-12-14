@@ -12,13 +12,6 @@ import org.springframework.beans.BeanUtils;
 
 class UserLogic {
 
-    // 对象属性生成
-    static User ToUser(Object req) {
-        User user = new User();
-        BeanUtils.copyProperties(req, user);
-        return user;
-    }
-
     // 注册api
     static Api<UserRegisterRes> registerApi(UserRegister dto) {
         Integer flag = dto.getFlag();

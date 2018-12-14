@@ -1,9 +1,8 @@
 package com.lubuwei.demojpa.modules.order;
 
 import com.lubuwei.demojpa.api.Api;
-import com.lubuwei.demojpa.api.ApiGenerator;
 import com.lubuwei.demojpa.api.PathConfig;
-import com.lubuwei.demojpa.entity.Order;
+import com.lubuwei.demojpa.modules.order.domain.OrderListRes;
 import com.lubuwei.demojpa.modules.order.dto.OrderList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +19,12 @@ public class OrderController {
     OrderService orderService;
 
     @GetMapping("list")
-    public Api<List<Order>> list() {
+    public Api<List<OrderListRes>> list() {
         // 合并到实体对象
         // 调用服务
         OrderList list = orderService.list();
         // 生成api
-        Api<List<Order>> api = OrderLogic.listApi(list);
+        Api<List<OrderListRes>> api = OrderLogic.listApi(list);
         return api;
     }
 }

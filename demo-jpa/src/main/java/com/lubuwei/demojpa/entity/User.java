@@ -1,7 +1,5 @@
 package com.lubuwei.demojpa.entity;
 
-import com.lubuwei.demojpa.utils.TimeUtils;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
