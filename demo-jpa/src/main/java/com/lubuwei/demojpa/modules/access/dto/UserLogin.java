@@ -3,7 +3,7 @@ package com.lubuwei.demojpa.modules.access.dto;
 import com.lubuwei.demojpa.entity.User;
 
 public class UserLogin {
-    private Integer flag;
+    private Integer flag = Flag.OK;
     private User user;
 
     public Integer getFlag() {

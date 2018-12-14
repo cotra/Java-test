@@ -1,7 +1,5 @@
 package com.lubuwei.demojpa.modules.access.dto;
 
-import javax.validation.constraints.NotBlank;
-
 public class UserRegister {
     private Integer flag = Flag.OK;
     private Long uid;

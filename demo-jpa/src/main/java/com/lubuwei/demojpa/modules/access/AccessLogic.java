@@ -12,12 +12,15 @@ import com.lubuwei.demojpa.modules.access.dto.UserRegister;
 import org.springframework.beans.BeanUtils;
 
 class AccessLogic {
+
+    // 对象属性生成
     static User ToUser(Object req) {
         User user = new User();
         BeanUtils.copyProperties(req, user);
         return user;
     }
 
+    // 注册api
     static Api<UserRegisterReq> registerApi(UserRegister dto) {
         Integer flag = dto.getFlag();
         if (flag == Flag.MOBILE_EXISTS) {
@@ -28,6 +31,7 @@ class AccessLogic {
         return ApiGenerator.ok(req);
     }
 
+    // 登录api
     static Api<UserLoginRes> loginApi(UserLogin dto) {
         Integer flag = dto.getFlag();
         if (flag == Flag.MOBILE_MORE_ONE) {

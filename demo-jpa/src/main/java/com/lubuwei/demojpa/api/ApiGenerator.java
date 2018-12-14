@@ -14,7 +14,6 @@ public class ApiGenerator {
         return api;
     }
 
-
     // 成功返回,无数据
     public static final Api<String> ok() {
         String code = Code.SUCCESS.getCode();
