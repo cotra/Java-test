@@ -4,7 +4,7 @@ package com.lubuwei.demojpa.modules.access;
 import com.lubuwei.demojpa.api.Api;
 import com.lubuwei.demojpa.api.ApiGenerator;
 import com.lubuwei.demojpa.entity.User;
-import com.lubuwei.demojpa.modules.access.domain.UserRegisterReq;
+import com.lubuwei.demojpa.modules.access.domain.UserRegisterRes;
 import com.lubuwei.demojpa.modules.access.dto.Flag;
 import com.lubuwei.demojpa.modules.access.domain.UserLoginRes;
 import com.lubuwei.demojpa.modules.access.dto.UserLogin;
@@ -21,20 +21,32 @@ class AccessLogic {
     }
 
     // 注册api
-    static Api<UserRegisterReq> registerApi(UserRegister dto) {
+    static Api<UserRegisterRes> registerApi(UserRegister dto) {
         Integer flag = dto.getFlag();
-        if (flag == Flag.MOBILE_EXISTS) {
+        // 失败返回
+        if (flag == Flag.USER_EXISTS) {
             return ApiGenerator.fail("手机号已经被注册");
         }
-        // 返回参数
-        UserRegisterReq req = new UserRegisterReq(dto.getUid());
-        return ApiGenerator.ok(req);
+        // 成功返回
+        if (flag == Flag.OK) {
+            UserRegisterRes res = new UserRegisterRes(dto.getUid());
+            return ApiGenerator.ok(res);
+        }
+        return ApiGenerator.fail();
+    }
+
+    // 对象属性生成
+    static UserLoginRes ToUserLoginRes(User user) {
+        UserLoginRes res = new UserLoginRes();
+        BeanUtils.copyProperties(user, res);
+        return res;
     }
 
     // 登录api
     static Api<UserLoginRes> loginApi(UserLogin dto) {
         Integer flag = dto.getFlag();
-        if (flag == Flag.MOBILE_MORE_ONE) {
+        // 失败返回
+        if (flag == Flag.USER_MORE_ONE) {
             return ApiGenerator.fail("用户查询失败");
         }
         if (flag == Flag.MOBILE_NO) {
@@ -43,9 +55,11 @@ class AccessLogic {
         if (flag == Flag.PASSWORD_ERROR) {
             return ApiGenerator.fail("密码错误");
         }
+        // 成功返回
         if (flag == Flag.OK) {
-
+            UserLoginRes res = ToUserLoginRes(dto.getUser());
+            return ApiGenerator.ok(res);
         }
-        return ApiGenerator.ok(null);
+        return ApiGenerator.fail();
     }
 }

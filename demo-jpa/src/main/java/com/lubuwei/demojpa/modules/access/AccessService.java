@@ -20,7 +20,7 @@ public class AccessService {
     @Autowired
     private UserDao userDao;
 
-    // 管理员查询条件
+    // 用户查询条件
     private Example<User> registerExample(User user) {
         user.setIsDelete(0); // 逻辑存在的用户
         ExampleMatcher matcher = ExampleMatcher.matching()
@@ -31,22 +31,24 @@ public class AccessService {
     }
 
     // 注册一个用户
-    public UserRegister register(User user) {
+    public UserRegister register(User user, String code) {
         UserRegister dto = new UserRegister();
         // 查询
         List<User> list = userDao.findAll(registerExample(user));
         // 检查是否已存在同手机号的记录, 没有就添加
-        if (list.size() == 0) {
+        if (list.size() != 0) {
+            dto.setFlag(Flag.USER_EXISTS);
+            return dto;
+        } else {
             // 动态写入
             user.setPassword(MD5Utils.toMD5(user.getPassword()));
             user.setCreateTime(TimeUtils.letDateToSqlTimestamp());
             // 保存
             userDao.save(user);
             dto.setUid(user.getUid());
+            dto.setFlag(Flag.OK);
             return dto;
         }
-        dto.setFlag(Flag.MOBILE_EXISTS);
-        return dto;
     }
 
     // 管理员查询条件
@@ -63,10 +65,9 @@ public class AccessService {
     public UserLogin login(User user, String code) {
         UserLogin dto = new UserLogin();
         List<User> list = userDao.findAll(loginExample(user));
-
         int size = list.size();
         if (size > 1) {
-            dto.setFlag(Flag.MOBILE_MORE_ONE);
+            dto.setFlag(Flag.USER_MORE_ONE);
             return dto;
         }
         if (size == 0) {
@@ -75,8 +76,10 @@ public class AccessService {
         }
         if (size == 1) {
             User info = list.get(0);
+            // 密码检查
             if (checkPasswordMD5(user.getPassword(), info.getPassword())) {
-                System.out.println("成功");
+                dto.setUser(info);
+                dto.setFlag(Flag.OK);
             } else {
                 dto.setFlag(Flag.PASSWORD_ERROR);
                 return dto;

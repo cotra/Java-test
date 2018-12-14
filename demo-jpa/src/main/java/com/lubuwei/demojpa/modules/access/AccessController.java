@@ -6,6 +6,7 @@ import com.lubuwei.demojpa.entity.User;
 import com.lubuwei.demojpa.modules.access.domain.UserLoginReq;
 import com.lubuwei.demojpa.modules.access.domain.UserLoginRes;
 import com.lubuwei.demojpa.modules.access.domain.UserRegisterReq;
+import com.lubuwei.demojpa.modules.access.domain.UserRegisterRes;
 import com.lubuwei.demojpa.modules.access.dto.UserLogin;
 import com.lubuwei.demojpa.modules.access.dto.UserRegister;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,13 @@ public class AccessController {
     AccessService accessService;
 
     @PostMapping("register")
-    public Api<UserRegisterReq> register (@RequestBody @Validated UserRegisterReq req) {
+    public Api<UserRegisterRes> register (@RequestBody @Validated UserRegisterReq req) {
         // 合并到实体对象
         User user = AccessLogic.ToUser(req);
         // 调用服务
-        UserRegister register = accessService.register(user);
+        UserRegister register = accessService.register(user, req.getCode());
         // 生成api
-        Api<UserRegisterReq> api = AccessLogic.registerApi(register);
+        Api<UserRegisterRes> api = AccessLogic.registerApi(register);
         return api;
     }
 

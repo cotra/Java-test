@@ -1,7 +1,7 @@
 package com.lubuwei.demojpa.modules.access.dto;
 
 public class UserRegister {
-    private Integer flag = Flag.OK;
+    private Integer flag;
     private Long uid;
 
     public Integer getFlag() {

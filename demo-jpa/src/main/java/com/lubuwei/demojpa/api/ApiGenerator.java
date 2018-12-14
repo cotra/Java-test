@@ -15,10 +15,10 @@ public class ApiGenerator {
     }
 
     // 成功返回,无数据
-    public static final Api<String> ok() {
+    public static final <T> Api<T> ok() {
         String code = Code.SUCCESS.getCode();
         String msg = Code.SUCCESS.getMsg();
-        Api<String> api = gen(code, msg, null);
+        Api<T> api = gen(code, msg, null);
         return api;
     }
 
@@ -31,16 +31,16 @@ public class ApiGenerator {
     }
 
     // 失败返回,默认msg
-    public static final Api<String> fail() {
+    public static final <T> Api<T> fail() {
         String code = Code.FAILURE.getCode();
         String msg = Code.FAILURE.getMsg();
-        Api<String> api = gen(code, msg, null);
+        Api<T> api = gen(code, msg, null);
         return api;
     }
 
     // 失败返回,统一code
-    public static final Api<String> fail(Code code) {
-        Api<String> api = gen(code.getCode(), code.getMsg(), null);
+    public static final <T> Api<T> fail(Code code) {
+        Api<T> api = gen(code.getCode(), code.getMsg(), null);
         return api;
     }
 
