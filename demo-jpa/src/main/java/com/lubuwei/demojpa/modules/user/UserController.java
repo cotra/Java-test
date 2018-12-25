@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -38,7 +39,13 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public Api<UserLoginRes> login (@RequestBody @Validated UserLoginReq req) {
+    public Api<UserLoginRes> login (@RequestBody @Validated UserLoginReq req, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            System.out.println("不存在session");
+            session.setAttribute("user", "hello jpa 1");
+        } else {
+            System.out.println(session.getAttribute("user"));
+        }
         // 合并到实体对象
         User user = ListUtils.entityToModel(req, User.class);
         // 调用服务
