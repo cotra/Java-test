@@ -38,22 +38,21 @@ public class UserController {
         try {
             String createText = defaultKaptcha.createText();
             BufferedImage bufferedImage = defaultKaptcha.createImage(createText);
-            ImageIO.write(bufferedImage, "jpg", jpegOutputStream);
+            ImageIO.write(bufferedImage, "jpeg", jpegOutputStream);
             captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
-
-            response.setHeader("Cache-Control", "no-cache");
-            response.setContentType("image/jpeg");
-
+            UserLogic.setHeaders(response);
             out = response.getOutputStream();
 
             out.write(captchaChallengeAsJpeg);
             out.flush();
+            out.close();
 
         } catch (IllegalArgumentException e) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         } finally {
             if (out != null) {
+                out.flush();
                 out.close();
             }
         }
