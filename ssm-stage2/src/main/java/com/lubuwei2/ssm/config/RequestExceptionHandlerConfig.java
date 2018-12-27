@@ -14,11 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestControllerAdvice
 public class RequestExceptionHandlerConfig {
+    // 处理验证
     @ExceptionHandler(value= MethodArgumentNotValidException.class)
     public Api<String> MethodArgumentNotValidHandler(HttpServletRequest request, MethodArgumentNotValidException exception)
     {
         // 按需重新封装需要返回的错误信息
         String msg = exception.getBindingResult().getFieldError().getDefaultMessage();
+        System.out.println(msg);
         return ApiGenerator.fail(msg);
     }
 }

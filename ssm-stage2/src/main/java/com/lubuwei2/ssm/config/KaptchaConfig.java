@@ -18,8 +18,8 @@ public class KaptchaConfig {
         properties.setProperty("kaptcha.border", "no");
         properties.setProperty("kaptcha.textproducer.char.length", "4");
         properties.setProperty("kaptcha.session.key", "code");
-        properties.setProperty("kaptcha.textproducer.font.color", "red");
-        properties.setProperty("kaptcha.noise.color", "red");
+        properties.setProperty("kaptcha.textproducer.font.color", "black");
+        properties.setProperty("kaptcha.noise.color", "blue");
         properties.setProperty("kaptcha.textproducer.char.space", "4");
         Config config = new Config(properties);
         defaultKaptcha.setConfig(config);

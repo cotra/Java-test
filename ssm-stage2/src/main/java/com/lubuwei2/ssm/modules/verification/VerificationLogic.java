@@ -1,5 +1,6 @@
 package com.lubuwei2.ssm.modules.verification;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
 class VerificationLogic {
@@ -8,6 +9,4 @@ class VerificationLogic {
         response.setHeader("Cache-Control", "no-cache");
         response.setContentType("image/jpeg");
     }
-
-    // 返回响应图片
 }
