@@ -1,17 +1,11 @@
-package com.lubuwei2.ssm.entity;
+package com.lubuwei2.ssm.modules.order.domain;
 
-import org.apache.ibatis.type.Alias;
-
-import java.io.Serializable;
 import java.sql.Timestamp;
 
-@Alias("Order")
-public class Order implements Serializable {
-
+public class OrderBasicResult {
     private Long oid;
     private String mobile;
     private Timestamp createTime;
-    private Integer isDelete;
 
     public Long getOid() {
         return oid;
@@ -35,13 +29,5 @@ public class Order implements Serializable {
 
     public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
-    }
-
-    public Integer getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
     }
 }
