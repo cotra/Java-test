@@ -32,4 +32,21 @@
             </if>
         </where>
     </select>
+    <!--findByMobile-->
+    <select id="findByMobile" parameterType="User" resultMap="BasicResult">
+        select
+        <include refid="cell"/>
+        from
+        <include refid="table"/>
+        where mobile = #{mobile} and is_delete = 0
+    </select>
+    <!--save-->
+    <insert id="save" parameterType="User" useGeneratedKeys="true"
+            keyProperty="uid">
+        insert into
+        <include refid="table"/>
+        (real_name, mobile, email, password, create_time)
+        values
+        (#{realName}, #{mobile}, #{email}, #{password}, #{createTime})
+    </insert>
 </mapper>

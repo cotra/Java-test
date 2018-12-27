@@ -7,7 +7,11 @@ import com.lubuwei2.ssm.modules.user.domain.UserBasicResult;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface UserDao extends BasicMapper<User>, FindMapper<User, UserBasicResult> {
+    // 根据手机查找
+    List<UserBasicResult> findByMobile(User user);
 }
