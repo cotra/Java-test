@@ -28,33 +28,4 @@ public class UserController {
     public Api<String> register() {
         return ApiGenerator.ok();
     }
-
-    @GetMapping(value = "kaptcha", produces = MediaType.IMAGE_JPEG_VALUE)
-    public void getKaptcha(HttpServletResponse response) throws Exception {
-        byte[] captchaChallengeAsJpeg = null;
-
-        OutputStream out = null;
-        ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
-        try {
-            String createText = defaultKaptcha.createText();
-            BufferedImage bufferedImage = defaultKaptcha.createImage(createText);
-            ImageIO.write(bufferedImage, "jpeg", jpegOutputStream);
-            captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
-            UserLogic.setHeaders(response);
-            out = response.getOutputStream();
-
-            out.write(captchaChallengeAsJpeg);
-            out.flush();
-            out.close();
-
-        } catch (IllegalArgumentException e) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        } finally {
-            if (out != null) {
-                out.flush();
-                out.close();
-            }
-        }
-    }
 }

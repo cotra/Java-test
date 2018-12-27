@@ -9,4 +9,6 @@ public class PathConfig {
     public static final String API_USER = API_V1 + "user/";
     // 订单功能集
     public static final String API_ORDER = API_V1 + "order/";
+    // 验证功能集
+    public static final String API_VERIFICATION = API_V1 + "verification/";
 }
