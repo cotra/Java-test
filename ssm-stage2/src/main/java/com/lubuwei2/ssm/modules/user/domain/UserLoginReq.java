@@ -2,12 +2,12 @@ package com.lubuwei2.ssm.modules.user.domain;
 
 import javax.validation.constraints.NotBlank;
 
-public class UserRegisterReq {
+public class UserLoginReq {
     @NotBlank(message = "电话不能为空")
     private String mobile;
-    @NotBlank(message = "密码不能为空")
+    @NotBlank(message = "密码能为空")
     private String password;
-    @NotBlank(message = "验证码不能为空")
+    @NotBlank(message = "验证码能为空")
     private String code;
 
     public String getMobile() {

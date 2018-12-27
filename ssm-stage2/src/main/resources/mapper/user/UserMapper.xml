@@ -49,4 +49,12 @@
         values
         (#{realName}, #{mobile}, #{email}, #{password}, #{createTime})
     </insert>
+    <!--findByMobile-->
+    <select id="findByMobileAndPassword" parameterType="User" resultMap="BasicResult">
+        select
+        <include refid="cell"/>
+        from
+        <include refid="table"/>
+        where mobile = #{mobile} and password = #{password} and is_delete = 0
+    </select>
 </mapper>

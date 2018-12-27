@@ -24,7 +24,7 @@ public class ListUtils {
 
     public static<F,T> T entityToModel(F entity, Class<T> modelClass) {
         Object model = null;
-        if (entity == null || modelClass ==null) {
+        if (entity == null || modelClass == null) {
             return null;
         }
 

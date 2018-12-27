@@ -14,4 +14,7 @@ import java.util.List;
 public interface UserDao extends BasicMapper<User>, FindMapper<User, UserBasicResult> {
     // 根据手机查找
     List<UserBasicResult> findByMobile(User user);
+
+    // 根据手机号好密码
+    List<UserBasicResult> findByMobileAndPassword(User user);
 }
