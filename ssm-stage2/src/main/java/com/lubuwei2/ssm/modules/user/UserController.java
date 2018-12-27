@@ -28,7 +28,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("register")
+    @PostMapping("security/register")
     public Api<UserRegisterRes> register(@RequestBody @Validated UserRegisterReq req, HttpSession session) {
         if (session.getAttribute("userReg") != null) {
             return ApiGenerator.fail("验证码错误");
@@ -46,12 +46,11 @@ public class UserController {
         return ApiGenerator.fail();
     }
 
-    @PostMapping("login")
+    @PostMapping("security/login")
     public Api<UserLoginRes> login(@RequestBody @Validated UserLoginReq req, HttpSession session) {
         User user = ListUtils.entityToModel(req, User.class);
         UserLogin dto = userService.login(user);
         if (dto.getFlag() == Flag.OK) {
-            session.setAttribute("user", dto.getUser());
             UserLoginRes res = ListUtils.entityToModel(dto.getUser(), UserLoginRes.class);
             return ApiGenerator.ok(res);
         }
