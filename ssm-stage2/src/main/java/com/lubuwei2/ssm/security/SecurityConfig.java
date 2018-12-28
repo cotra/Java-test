@@ -1,5 +1,6 @@
 package com.lubuwei2.ssm.security;
 
+import com.lubuwei2.ssm.api.PathConfig;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,7 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         HttpSecurity security = httpSecurity.csrf().disable();
         // 异常处理
         HttpSecurity role = security.exceptionHandling().authenticationEntryPoint(new AppAuthenticationEntryPoint()).accessDeniedHandler(new AppAccessDeniedHandler()).and();               // 权限设置
-        HttpSecurity and = role.authorizeRequests().antMatchers("/api/v1/user/security/*", "api/v1/verification/*").permitAll()
+        System.out.println(PathConfig.API_SECURITY);
+        HttpSecurity and = role.authorizeRequests().antMatchers(PathConfig.API_SECURITY + "*", PathConfig.API_VERIFICATION + "*").permitAll()
                 .antMatchers("/api/v1/order/**").authenticated().and();
         // 添加过滤器
         and.addFilter(new AppAuthenticationFilter(authenticationManager()));

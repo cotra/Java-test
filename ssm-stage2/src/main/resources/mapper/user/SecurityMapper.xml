@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lubuwei2.ssm.modules.security.SecurityDao">
+    <!--result map-->
+    <resultMap id="BasicResult" type="com.lubuwei2.ssm.modules.security.domain.LoginRes">
+        <id column="uid" property="uid" jdbcType="BIGINT" />
+        <id column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <id column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <id column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <id column="email" property="email" jdbcType="VARCHAR"/>
+        <id column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--table-->
+    <sql id="table">
+        lu_user
+    </sql>
+    <!--table-->
+    <sql id="cell">
+        uid, real_name, nickname, mobile, email, create_time
+    </sql>
+    <!--find-->
+    <select id="find" parameterType="User" resultMap="BasicResult">
+        select
+        <include refid="cell"/>
+        from
+        <include refid="table"/>
+        <where>
+            is_delete = 0
+            <if test="mobile != null and mobile != ''">
+                AND mobile = #{mobile}
+            </if>
+        </where>
+    </select>
+    <!--findByMobile-->
+    <select id="findByMobile" parameterType="User" resultMap="BasicResult">
+        select
+        <include refid="cell"/>
+        from
+        <include refid="table"/>
+        where mobile = #{mobile} and is_delete = 0
+    </select>
+    <!--save-->
+    <insert id="save" parameterType="User" useGeneratedKeys="true"
+            keyProperty="uid">
+        insert into
+        <include refid="table"/>
+        (real_name, mobile, email, password, create_time)
+        values
+        (#{realName}, #{mobile}, #{email}, #{password}, #{createTime})
+    </insert>
+    <!--findByMobile-->
+    <select id="findByMobileAndPassword" parameterType="User" resultMap="BasicResult">
+        select
+        <include refid="cell"/>
+        from
+        <include refid="table"/>
+        where mobile = #{mobile} and password = #{password} and is_delete = 0
+    </select>
+</mapper>

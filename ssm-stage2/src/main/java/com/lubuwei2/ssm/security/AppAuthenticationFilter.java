@@ -2,6 +2,7 @@ package com.lubuwei2.ssm.security;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -20,11 +21,18 @@ public class AppAuthenticationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        SecurityContext context = SecurityContextHolder.getContext();
+        context.setAuthentication(authentication);
         chain.doFilter(request, response);
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-        return new UsernamePasswordAuthenticationToken("user", "123456");
+        String user = (String)request.getSession().getAttribute("user");
+        System.out.println("session 信息 => " + user);
+        if(user != null && user.equals("15012345678")) {
+            return new UsernamePasswordAuthenticationToken("user", "123456");
+        }
+        return null;
     }
 }

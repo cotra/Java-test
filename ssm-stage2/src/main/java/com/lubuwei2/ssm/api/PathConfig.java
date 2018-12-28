@@ -11,4 +11,6 @@ public class PathConfig {
     public static final String API_ORDER = API_V1 + "order/";
     // 验证功能集
     public static final String API_VERIFICATION = API_V1 + "verification/";
+    // 安全功能集
+    public static final String API_SECURITY = API_V1 + "security/";
 }
