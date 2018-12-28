@@ -51,6 +51,7 @@ public class UserController {
         User user = ListUtils.entityToModel(req, User.class);
         UserLogin dto = userService.login(user);
         if (dto.getFlag() == Flag.OK) {
+            session.setAttribute("user", dto.getUser().getMobile());
             UserLoginRes res = ListUtils.entityToModel(dto.getUser(), UserLoginRes.class);
             return ApiGenerator.ok(res);
         }

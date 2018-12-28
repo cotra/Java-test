@@ -17,6 +17,9 @@ public class User implements Serializable {
     private Timestamp createTime;
     private Integer isDelete;
 
+    public User() {
+    }
+
     public Long getUid() {
         return uid;
     }
