@@ -3,12 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lubuwei2.ssm.modules.security.SecurityDao">
     <!--result map-->
-    <resultMap id="BasicResult" type="com.lubuwei2.ssm.modules.security.domain.LoginRes">
+    <resultMap id="BasicResult" type="com.lubuwei2.ssm.modules.security.dto.FindResult">
         <id column="uid" property="uid" jdbcType="BIGINT" />
         <id column="real_name" property="realName" jdbcType="VARCHAR"/>
         <id column="nickname" property="nickname" jdbcType="VARCHAR"/>
         <id column="mobile" property="mobile" jdbcType="VARCHAR"/>
         <id column="email" property="email" jdbcType="VARCHAR"/>
+        <id column="password" property="password" jdbcType="VARCHAR"/>
         <id column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <!--table-->
@@ -17,7 +18,7 @@
     </sql>
     <!--table-->
     <sql id="cell">
-        uid, real_name, nickname, mobile, email, create_time
+        uid, real_name, nickname, mobile, email, password, create_time
     </sql>
     <!--find-->
     <select id="find" parameterType="User" resultMap="BasicResult">

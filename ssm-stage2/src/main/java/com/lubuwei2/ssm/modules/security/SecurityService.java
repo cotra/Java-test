@@ -2,6 +2,7 @@ package com.lubuwei2.ssm.modules.security;
 
 import com.lubuwei2.ssm.entity.User;
 import com.lubuwei2.ssm.modules.security.domain.LoginRes;
+import com.lubuwei2.ssm.modules.security.dto.FindResult;
 import com.lubuwei2.ssm.modules.security.dto.Flag;
 import com.lubuwei2.ssm.modules.security.dto.Login;
 import com.lubuwei2.ssm.modules.security.dto.Register;
@@ -38,7 +39,7 @@ class SecurityService {
         Login dto = new Login();
         // 查询
         user.setPassword(MD5Utils.toMD5(user.getPassword()));
-        List<LoginRes> list = dao.findByMobileAndPassword(user);
+        List<FindResult> list = dao.findByMobileAndPassword(user);
         if(list.size() == 1) {
             dto.setFlag(Flag.OK);
             dto.setUser(list.get(0));

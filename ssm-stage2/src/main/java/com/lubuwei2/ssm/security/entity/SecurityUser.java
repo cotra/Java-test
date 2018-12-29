@@ -1,35 +1,39 @@
-package com.lubuwei2.ssm.security;
+package com.lubuwei2.ssm.security.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SecurityUser implements UserDetails {
-    private final Long id;
-    private final String username;
-    private final String password;
 
-    public SecurityUser(Long id, String username, String password) {
-        this.id = id;
-        this.username = username;
+    private Long uid;
+    private String username;
+    private String password;
+    private Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+
+    public SecurityUser(Long uid, String username, String password) {
+        this.uid = uid;
         this.password = password;
+        this.username = username;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.authorities;
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     @Override

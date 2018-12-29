@@ -17,10 +17,10 @@ public class AppAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
-        Authentication request = getAuthentication(req);
+        Authentication authentication = getAuthentication(req);
         // 设置对比项
         SecurityContext context = SecurityContextHolder.getContext();
-        context.setAuthentication(request);
+        context.setAuthentication(authentication);
         // 继续
         filterChain.doFilter(req, res);
     }

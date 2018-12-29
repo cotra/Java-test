@@ -8,6 +8,7 @@ import com.lubuwei2.ssm.modules.security.domain.LoginReq;
 import com.lubuwei2.ssm.modules.security.domain.LoginRes;
 import com.lubuwei2.ssm.modules.security.domain.RegisterReq;
 import com.lubuwei2.ssm.modules.security.domain.RegisterRes;
+import com.lubuwei2.ssm.modules.security.dto.FindResult;
 import com.lubuwei2.ssm.modules.security.dto.Flag;
 import com.lubuwei2.ssm.modules.security.dto.Login;
 import com.lubuwei2.ssm.modules.security.dto.Register;
