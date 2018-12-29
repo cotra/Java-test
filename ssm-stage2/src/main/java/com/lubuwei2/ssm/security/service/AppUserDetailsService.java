@@ -23,15 +23,11 @@ public class AppUserDetailsService implements UserDetailsService, Serializable {
 
     @Override
     public UserDetails loadUserByUsername(String mobile) throws UsernameNotFoundException {
-        System.out.println("系统用户信息" + mobile);
-        User user = new User();
-        user.setMobile(mobile);
-        List<FindResult> list = securityDao.findByMobile(user);
+        List<FindResult> list = securityDao.findByMobile(new User(mobile));
         int size = list.size();
         if (size == 0 || size > 1) {
             throw new UsernameNotFoundException("记录" + mobile + "不存在");
         }
-        System.out.println(size);
         FindResult res = list.get(0);
         return new SecurityUser(res.getUid(), res.getMobile(), "{noop}" + res.getPassword());
     }

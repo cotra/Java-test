@@ -5,11 +5,20 @@ import java.sql.Timestamp;
 
 public class LoginRes implements Serializable {
     private Long uid;
+    private String token;
     private String realName;
     private String nickname;
     private String mobile;
     private String email;
     private Timestamp createTime;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public Long getUid() {
         return uid;

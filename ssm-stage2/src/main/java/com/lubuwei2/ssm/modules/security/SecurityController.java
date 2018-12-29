@@ -47,13 +47,20 @@ public class SecurityController {
         return ApiGenerator.fail();
     }
 
+    /**
+     * 登录成功后返回用户信息和一个jwt
+     * @param req
+     * @param session
+     * @return
+     */
     @PostMapping("login")
     public Api<LoginRes> login(@RequestBody @Validated LoginReq req, HttpSession session) {
         User user = ListUtils.entityToModel(req, User.class);
         Login dto = service.login(user);
         if (dto.getFlag() == Flag.OK) {
-            session.setAttribute("user", dto.getUser().getMobile());
             LoginRes res = ListUtils.entityToModel(dto.getUser(), LoginRes.class);
+            // 根据返回用户信息生成jwt
+            System.out.println(res.getToken());
             return ApiGenerator.ok(res);
         }
         // 默认

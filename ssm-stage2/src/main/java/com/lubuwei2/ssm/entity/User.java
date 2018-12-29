@@ -20,6 +20,10 @@ public class User implements Serializable {
     public User() {
     }
 
+    public User(String mobile) {
+        this.mobile = mobile;
+    }
+
     public Long getUid() {
         return uid;
     }
