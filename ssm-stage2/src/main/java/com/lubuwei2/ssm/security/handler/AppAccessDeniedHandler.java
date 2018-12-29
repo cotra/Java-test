@@ -1,4 +1,4 @@
-package com.lubuwei2.ssm.security;
+package com.lubuwei2.ssm.security.handler;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

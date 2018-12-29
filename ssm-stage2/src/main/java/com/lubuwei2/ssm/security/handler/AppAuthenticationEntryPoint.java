@@ -1,4 +1,4 @@
-package com.lubuwei2.ssm.security;
+package com.lubuwei2.ssm.security.handler;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
