@@ -12,6 +12,7 @@ import com.lubuwei2.ssm.modules.security.dto.FindResult;
 import com.lubuwei2.ssm.modules.security.dto.Flag;
 import com.lubuwei2.ssm.modules.security.dto.Login;
 import com.lubuwei2.ssm.modules.security.dto.Register;
+import com.lubuwei2.ssm.security.jwt.JwtGenerator;
 import com.lubuwei2.ssm.utils.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -28,6 +29,9 @@ public class SecurityController {
 
     @Autowired
     SecurityService service;
+
+    @Autowired
+    JwtGenerator jwt;
 
     @PostMapping("register")
     public Api<RegisterRes> register(@RequestBody @Validated RegisterReq req, HttpSession session) {
@@ -60,7 +64,7 @@ public class SecurityController {
         if (dto.getFlag() == Flag.OK) {
             LoginRes res = ListUtils.entityToModel(dto.getUser(), LoginRes.class);
             // 根据返回用户信息生成jwt
-            System.out.println(res.getToken());
+            res.setToken(jwt.create());
             return ApiGenerator.ok(res);
         }
         // 默认

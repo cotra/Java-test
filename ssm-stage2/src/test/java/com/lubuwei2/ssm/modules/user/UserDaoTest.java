@@ -15,7 +15,7 @@ public class UserDaoTest {
     UserDao userDao;
 
     @Test
-    public void findTest() {
+    public void find() {
         //
     }
 }
