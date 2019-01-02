@@ -29,6 +29,9 @@ public class SecurityController {
     @Autowired
     SecurityService service;
 
+    @Autowired
+    JwtGenerator jwt;
+
     @PostMapping("register")
     public Api<RegisterRes> register(@RequestBody @Validated RegisterReq req, HttpSession session) {
         if (session.getAttribute("userReg") != null) {
@@ -49,18 +52,18 @@ public class SecurityController {
 
     /**
      * 登录成功后返回用户信息和一个jwt
+     * 缓存中存储
      * @param req
-     * @param session
      * @return
      */
     @PostMapping("login")
-    public Api<LoginRes> login(@RequestBody @Validated LoginReq req, HttpSession session) {
+    public Api<LoginRes> login(@RequestBody @Validated LoginReq req) {
         User user = ListUtils.entityToModel(req, User.class);
         Login dto = service.login(user);
         if (dto.getFlag() == Flag.OK) {
             LoginRes res = ListUtils.entityToModel(dto.getUser(), LoginRes.class);
             // 根据返回用户信息生成jwt
-            res.setToken(JwtGenerator.create());
+            res.setToken(jwt.create(res.getMobile(), res.getUid().toString()));
             return ApiGenerator.ok(res);
         }
         // 默认

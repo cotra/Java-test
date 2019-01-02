@@ -1,6 +1,10 @@
 package com.lubuwei2.ssm.security.filter;
 
+import com.lubuwei2.ssm.security.jwt.JwtGenerator;
 import com.lubuwei2.ssm.utils.MD5Utils;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +21,8 @@ import java.io.IOException;
 
 @Component
 public class AppAuthenticationFilter extends OncePerRequestFilter {
+    @Autowired
+    JwtGenerator jwt;
 
     @Value("${jwt.name}")
     private String tokenName;
@@ -33,12 +39,21 @@ public class AppAuthenticationFilter extends OncePerRequestFilter {
 
     // 认证实现
     private Authentication getAuthentication(HttpServletRequest req) {
-        // 获得token
+        // 获得token字符串
         String token = req.getHeader(tokenName);
-        if (token != null) {
-
-        }
         System.out.println(token);
-        return new UsernamePasswordAuthenticationToken("15012345678", MD5Utils.toMD5("123456"));
+        if (token != null) {
+            // 验证是否是有效token
+            Jws<Claims> claimsJws = jwt.read(token);
+            if(claimsJws != null) {
+                Claims body = claimsJws.getBody();
+                System.out.println();
+                // 电话号码
+                String mobile = body.getAudience();
+                return new UsernamePasswordAuthenticationToken(mobile, null);
+            }
+            return null;
+        }
+        return null;
     }
 }

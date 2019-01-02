@@ -1,11 +1,11 @@
 package com.lubuwei2.ssm.security.jwt;
 
 import com.lubuwei2.ssm.utils.TimeUtils;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -14,28 +14,38 @@ import java.util.Date;
  * Created by Administrator on 2018/3/23.
  */
 
+@Component
 public class JwtGenerator {
 
+    @Value("${jwt.iss}")
+    private String iss;
+
+    @Value("${jwt.exp}")
+    private String exp;
+
     // 随机key
-    private static SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     // 生成jws
-    public static String create() {
+    public String create(String aud, String id) {
         String jws = Jwts.builder()
-                .setIssuer("cxb")
-                .setSubject("Bob")
-                .setAudience("you")
-                .setExpiration(TimeUtils.addMonths(1))
+                .setIssuer(iss)
+                .setAudience(aud)
+                .setExpiration(TimeUtils.addMonths(Integer.parseInt(exp)))
                 .setIssuedAt(new Date())
-                .setId("1")
+                .setId(id)
                 .signWith(key).compact();
         return jws;
     }
 
-    //
-    public static String read(String jws) {
-        Jws<Claims> claimsJws = Jwts.parser().setSigningKey(key).parseClaimsJws(jws);
-        System.out.println(claimsJws);
-        return null;
+    // 读取
+    public Jws<Claims> read(String jws) {
+        try {
+            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(key).parseClaimsJws(jws);
+            return claimsJws;
+        } catch (JwtException ex) {
+            System.out.println(ex);
+            return null;
+        }
     }
 }

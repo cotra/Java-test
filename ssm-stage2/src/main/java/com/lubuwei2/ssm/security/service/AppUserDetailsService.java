@@ -5,7 +5,6 @@ import com.lubuwei2.ssm.modules.security.SecurityDao;
 import com.lubuwei2.ssm.modules.security.domain.LoginRes;
 import com.lubuwei2.ssm.modules.security.dto.FindResult;
 import com.lubuwei2.ssm.security.entity.SecurityUser;
-import com.lubuwei2.ssm.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;
+
+/**
+ * 每次验证读数据表太扯淡了,换个方式
+ */
 
 @Service
 public class AppUserDetailsService implements UserDetailsService, Serializable {
