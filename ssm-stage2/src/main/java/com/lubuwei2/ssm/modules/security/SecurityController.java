@@ -14,6 +14,7 @@ import com.lubuwei2.ssm.modules.security.dto.Register;
 import com.lubuwei2.ssm.security.jwt.JwtGenerator;
 import com.lubuwei2.ssm.utils.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +22,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 @RestController
 @RequestMapping(value = PathConfig.API_SECURITY)
 public class SecurityController {
+
+    @Value("${jwt.name}")
+    private String tokenName;
 
     @Autowired
     SecurityService service;
@@ -52,7 +57,7 @@ public class SecurityController {
 
     /**
      * 登录成功后返回用户信息和一个jwt
-     * 缓存中存储
+     * 缓存中存储一个安全对象
      * @param req
      * @return
      */
@@ -63,7 +68,12 @@ public class SecurityController {
         if (dto.getFlag() == Flag.OK) {
             LoginRes res = ListUtils.entityToModel(dto.getUser(), LoginRes.class);
             // 根据返回用户信息生成jwt
-            res.setToken(jwt.create(res.getMobile(), res.getUid().toString()));
+            Date iat = new Date(); // 签发时间
+            String token = jwt.create(res.getMobile(), iat);
+            res.setToken(token);
+            // 生成安全信息存储在redis中
+
+
             return ApiGenerator.ok(res);
         }
         // 默认

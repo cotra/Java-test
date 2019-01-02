@@ -27,13 +27,12 @@ public class JwtGenerator {
     private SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     // 生成jws
-    public String create(String aud, String id) {
+    public String create(String aud, Date iat) {
         String jws = Jwts.builder()
                 .setIssuer(iss)
                 .setAudience(aud)
                 .setExpiration(TimeUtils.addMonths(Integer.parseInt(exp)))
-                .setIssuedAt(new Date())
-                .setId(id)
+                .setIssuedAt(iat)
                 .signWith(key).compact();
         return jws;
     }
