@@ -8,16 +8,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class JwtGeneratorTest {
-
-    @Autowired
-    JwtGenerator jwtGenerator;
 
     @Test
     public void create() {
-        String s = jwtGenerator.create();
+        String s = JwtGenerator.create();
         System.out.println(s);
+    }
+
+    @Test
+    public void read() {
+        String token = JwtGenerator.create();
+        JwtGenerator.read(token);
     }
 }

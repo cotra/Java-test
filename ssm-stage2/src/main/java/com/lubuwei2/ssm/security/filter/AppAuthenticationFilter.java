@@ -31,10 +31,13 @@ public class AppAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(req, res);
     }
 
-    // 验证方法
+    // 认证实现
     private Authentication getAuthentication(HttpServletRequest req) {
-        System.out.println(tokenName);
+        // 获得token
         String token = req.getHeader(tokenName);
+        if (token != null) {
+
+        }
         System.out.println(token);
         return new UsernamePasswordAuthenticationToken("15012345678", MD5Utils.toMD5("123456"));
     }

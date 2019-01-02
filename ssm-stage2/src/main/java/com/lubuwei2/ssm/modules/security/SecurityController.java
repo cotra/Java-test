@@ -8,7 +8,6 @@ import com.lubuwei2.ssm.modules.security.domain.LoginReq;
 import com.lubuwei2.ssm.modules.security.domain.LoginRes;
 import com.lubuwei2.ssm.modules.security.domain.RegisterReq;
 import com.lubuwei2.ssm.modules.security.domain.RegisterRes;
-import com.lubuwei2.ssm.modules.security.dto.FindResult;
 import com.lubuwei2.ssm.modules.security.dto.Flag;
 import com.lubuwei2.ssm.modules.security.dto.Login;
 import com.lubuwei2.ssm.modules.security.dto.Register;
@@ -29,9 +28,6 @@ public class SecurityController {
 
     @Autowired
     SecurityService service;
-
-    @Autowired
-    JwtGenerator jwt;
 
     @PostMapping("register")
     public Api<RegisterRes> register(@RequestBody @Validated RegisterReq req, HttpSession session) {
@@ -64,7 +60,7 @@ public class SecurityController {
         if (dto.getFlag() == Flag.OK) {
             LoginRes res = ListUtils.entityToModel(dto.getUser(), LoginRes.class);
             // 根据返回用户信息生成jwt
-            res.setToken(jwt.create());
+            res.setToken(JwtGenerator.create());
             return ApiGenerator.ok(res);
         }
         // 默认
