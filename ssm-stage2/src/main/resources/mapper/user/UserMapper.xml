@@ -9,6 +9,7 @@
         <id column="nickname" property="nickname" jdbcType="VARCHAR"/>
         <id column="mobile" property="mobile" jdbcType="VARCHAR"/>
         <id column="email" property="email" jdbcType="VARCHAR"/>
+        <id column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP"/>
         <id column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <!--table-->
@@ -17,6 +18,6 @@
     </sql>
     <!--table-->
     <sql id="cell">
-        uid, real_name, nickname, mobile, email, create_time
+        uid, real_name, nickname, mobile, email, last_login_time,create_time
     </sql>
 </mapper>

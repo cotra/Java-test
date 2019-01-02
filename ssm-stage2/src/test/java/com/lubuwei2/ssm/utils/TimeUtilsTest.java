@@ -13,6 +13,5 @@ public class TimeUtilsTest {
     public void addOneYear() {
         Date date = TimeUtils.addMonths(13);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(sdf.format(date));
     }
 }

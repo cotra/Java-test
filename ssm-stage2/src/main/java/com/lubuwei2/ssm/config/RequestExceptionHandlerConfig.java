@@ -20,7 +20,6 @@ public class RequestExceptionHandlerConfig {
     {
         // 按需重新封装需要返回的错误信息
         String msg = exception.getBindingResult().getFieldError().getDefaultMessage();
-        System.out.println(msg);
         return ApiGenerator.fail(msg);
     }
 }

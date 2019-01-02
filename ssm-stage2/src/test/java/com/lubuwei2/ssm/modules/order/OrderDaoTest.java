@@ -23,7 +23,6 @@ public class OrderDaoTest {
     public void find() {
         Order order = new Order();
         List<OrderBasicResult> list = orderDao.find(order);
-        System.out.println(list.size());
         assertNotNull(list);
     }
 }

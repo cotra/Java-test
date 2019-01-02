@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 @Component
 public class AppAuthenticationFilter extends OncePerRequestFilter {
@@ -41,16 +42,15 @@ public class AppAuthenticationFilter extends OncePerRequestFilter {
     private Authentication getAuthentication(HttpServletRequest req) {
         // 获得token字符串
         String token = req.getHeader(tokenName);
-        System.out.println(token);
         if (token != null) {
             // 验证是否是有效token
             Jws<Claims> claimsJws = jwt.read(token);
             if(claimsJws != null) {
                 Claims body = claimsJws.getBody();
-                System.out.println();
                 // 电话号码
                 String mobile = body.getAudience();
-                return new UsernamePasswordAuthenticationToken(mobile, null);
+                //
+                return new UsernamePasswordAuthenticationToken(mobile, "123456");
             }
             return null;
         }

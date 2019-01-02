@@ -1,12 +1,15 @@
 package com.lubuwei2.ssm.security.entity;
 
-public class SecurityInfo {
-    private String mobile;
-    private String tokenPwd;
+import java.io.Serializable;
+import java.util.Date;
 
-    public SecurityInfo(String mobile, String tokenPwd) {
+public class SecurityInfo implements Serializable {
+    private String mobile;
+    private Date iat;
+
+    public SecurityInfo(String mobile, Date iat) {
         this.mobile = mobile;
-        this.tokenPwd = tokenPwd;
+        this.iat = iat;
     }
 
     public String getMobile() {
@@ -17,11 +20,11 @@ public class SecurityInfo {
         this.mobile = mobile;
     }
 
-    public String getTokenPwd() {
-        return tokenPwd;
+    public Date getIat() {
+        return iat;
     }
 
-    public void setTokenPwd(String tokenPwd) {
-        this.tokenPwd = tokenPwd;
+    public void setIat(Date iat) {
+        this.iat = iat;
     }
 }

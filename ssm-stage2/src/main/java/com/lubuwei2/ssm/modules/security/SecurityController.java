@@ -57,7 +57,6 @@ public class SecurityController {
 
     /**
      * 登录成功后返回用户信息和一个jwt
-     * 缓存中存储一个安全对象
      * @param req
      * @return
      */
@@ -71,12 +70,12 @@ public class SecurityController {
             Date iat = new Date(); // 签发时间
             String token = jwt.create(res.getMobile(), iat);
             res.setToken(token);
-            // 生成安全信息存储在redis中
-
-
+            // 返回
             return ApiGenerator.ok(res);
         }
         // 默认
         return ApiGenerator.fail();
     }
+
+
 }

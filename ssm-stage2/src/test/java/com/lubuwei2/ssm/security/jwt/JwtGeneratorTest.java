@@ -22,13 +22,11 @@ public class JwtGeneratorTest {
     @Test
     public void create() {
         String s = jwt.create("15012345678", new Date());
-        System.out.println(s);
     }
 
     @Test
     public void read() {
         String s = jwt.create("15012345678", new Date());
         Jws<Claims> jws = jwt.read(s);
-        System.out.println(jws.getBody());
     }
 }

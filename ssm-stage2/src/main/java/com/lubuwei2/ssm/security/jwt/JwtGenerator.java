@@ -43,7 +43,6 @@ public class JwtGenerator {
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(key).parseClaimsJws(jws);
             return claimsJws;
         } catch (JwtException ex) {
-            System.out.println(ex);
             return null;
         }
     }

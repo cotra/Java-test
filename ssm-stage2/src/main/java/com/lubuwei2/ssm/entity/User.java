@@ -15,6 +15,7 @@ public class User implements Serializable {
     private String email;
     private String password;
     private Timestamp createTime;
+    private Timestamp lastLoginTime;
     private Integer isDelete;
 
     public User() {
@@ -22,6 +23,14 @@ public class User implements Serializable {
 
     public User(String mobile) {
         this.mobile = mobile;
+    }
+
+    public Timestamp getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Timestamp lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 
     public Long getUid() {

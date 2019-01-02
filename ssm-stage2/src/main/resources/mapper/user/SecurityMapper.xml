@@ -10,6 +10,7 @@
         <id column="mobile" property="mobile" jdbcType="VARCHAR"/>
         <id column="email" property="email" jdbcType="VARCHAR"/>
         <id column="password" property="password" jdbcType="VARCHAR"/>
+        <id column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP"/>
         <id column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <!--table-->
@@ -18,7 +19,7 @@
     </sql>
     <!--table-->
     <sql id="cell">
-        uid, real_name, nickname, mobile, email, password, create_time
+        uid, real_name, nickname, mobile, email, password, last_login_time, create_time
     </sql>
     <!--find-->
     <select id="find" parameterType="User" resultMap="BasicResult">
@@ -58,4 +59,5 @@
         <include refid="table"/>
         where mobile = #{mobile} and password = #{password} and is_delete = 0
     </select>
+    <!--update-->
 </mapper>

@@ -10,6 +10,15 @@ public class FindResult {
     private String email;
     private String password;
     private Timestamp createTime;
+    private Timestamp lastLoginTime;
+
+    public Timestamp getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Timestamp lastLoginTime)  {
+        this.lastLoginTime = lastLoginTime;
+    }
 
     public Long getUid() {
         return uid;

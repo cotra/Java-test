@@ -1,6 +1,6 @@
 package com.lubuwei2.ssm.config;
 
-import com.google.gson.Gson;
+import com.lubuwei2.ssm.utils.JsonUtils;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -12,17 +12,13 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 
+import javax.sound.midi.Soundbank;
 import java.lang.reflect.Method;
 import java.time.Duration;
 
 @Configuration
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
-
-    @Bean
-    public Gson getGson() {
-        return new Gson();
-    }
 
     @Bean
     public KeyGenerator keyGenerator() {
@@ -33,8 +29,10 @@ public class RedisConfig extends CachingConfigurerSupport {
                 // 类名.方法名
                 sb.append(target.getClass().getName()).append(".").append(method.getName());
                 // 参数json化后的hash
+
                 for (Object obj : params) {
-                    sb.append(getGson().toJson(obj).hashCode());
+                    // 同样的参数
+                    sb.append(JsonUtils.obj2String(obj).hashCode());
                 }
                 return sb.toString();
             }
@@ -44,7 +42,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(1)); // 设置缓存有效期
+                .entryTtl(Duration.ofMinutes(100000)); // 设置缓存有效期
         return RedisCacheManager
                 .builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
                 .cacheDefaults(redisCacheConfiguration).build();
