@@ -18,6 +18,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AppUserDetailsService appUserDetailsService;
 
+    @Autowired
+    private AppAuthenticationFilter appAuthenticationFilter;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(appUserDetailsService);
@@ -33,6 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 规则
         HttpSecurity role = handler.authorizeRequests().antMatchers(PathConfig.API_SECURITY + "*", PathConfig.API_VERIFICATION + "*").permitAll().anyRequest().authenticated().and();
         // 认证过滤器
-        role.addFilterBefore(new AppAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        role.addFilterBefore(appAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
