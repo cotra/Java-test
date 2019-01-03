@@ -23,7 +23,6 @@ public class EmployeesDaoTest {
     public void find() {
         Employee employee = new Employee();
         List<OrderBasicResult> list = dao.find(employee);
-        System.out.println(list.size());
         assertNotNull(list);
     }
 }
