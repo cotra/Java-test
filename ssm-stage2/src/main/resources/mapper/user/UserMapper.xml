@@ -14,7 +14,7 @@
     </resultMap>
     <!--table-->
     <sql id="table">
-        lu_user
+        users
     </sql>
     <!--table-->
     <sql id="cell">

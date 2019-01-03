@@ -10,7 +10,7 @@
     </resultMap>
     <!--table-->
     <sql id="table">
-        lu_order
+        order
     </sql>
     <!--table-->
     <sql id="cell">
