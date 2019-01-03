@@ -7,8 +7,10 @@ public enum Code {
     // 成功
     SUCCESS("0000", "操作成功"),
     // 失败
-    FAILURE("1000", "操作失败")
-    // 其它
+    FAILURE("1000", "操作失败"),
+    // 授权
+    FAILURE_TOKEN_ERROR("1010", "token验证失败"),
+    FAILURE_ACCESS_DENIED("1010", "权限不足")
     ;
 
     private final String code;

@@ -6,8 +6,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -28,13 +30,15 @@ public class AppAuthenticationFilter extends OncePerRequestFilter {
     private String tokenName;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
         Authentication authentication = getAuthentication(req);
         // 设置对比项
         SecurityContext context = SecurityContextHolder.getContext();
-        context.setAuthentication(authentication);
+        if(context.getAuthentication() == null) {
+            context.setAuthentication(authentication);
+        }
         // 继续
-        filterChain.doFilter(req, res);
+        chain.doFilter(req, res);
     }
 
     // 认证实现

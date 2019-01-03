@@ -30,7 +30,7 @@ public class RedisConfig extends CachingConfigurerSupport {
                 // 参数json化后的hash
                 for (Object obj : params) {
                     // 同样的参数
-                    sb.append(JsonUtils.obj2String(obj).hashCode());
+                    sb.append(JsonUtils.objToString(obj).hashCode());
                 }
                 return sb.toString();
             }

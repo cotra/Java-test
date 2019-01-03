@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class JsonUtils {
     private static ObjectMapper objectMapper = new ObjectMapper();
 
-    public static <T> String obj2String(T obj) {
+    public static <T> String objToString(T obj) {
         if (obj == null) {
             return null;
         }

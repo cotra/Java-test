@@ -1,5 +1,9 @@
 package com.lubuwei2.ssm.security.handler;
 
+import com.lubuwei2.ssm.api.ApiGenerator;
+import com.lubuwei2.ssm.api.Code;
+import com.lubuwei2.ssm.entity.User;
+import com.lubuwei2.ssm.utils.JsonUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -11,8 +15,9 @@ import java.io.IOException;
 public class AppAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest req, HttpServletResponse res, AuthenticationException e) throws IOException, ServletException {
-        res.setHeader("Content-Type", "application/json;charset=utf-8");
-        res.getWriter().print("没有登录");
+        res.setContentType("application/json");
+        res.setCharacterEncoding("UTF-8");
+        res.getWriter().write(JsonUtils.objToString(ApiGenerator.fail(Code.FAILURE_TOKEN_ERROR)));
         res.getWriter().flush();
     }
 }
