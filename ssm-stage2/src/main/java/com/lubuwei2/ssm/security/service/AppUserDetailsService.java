@@ -28,13 +28,16 @@ public class AppUserDetailsService implements UserDetailsService, Serializable {
     @Override
     @Cacheable(value = "securityInfo")
     public UserDetails loadUserByUsername(String mobile) throws UsernameNotFoundException {
-        System.out.println("重复查询");
         List<FindResult> list = securityDao.findByMobile(new User(mobile));
         int size = list.size();
         if (size == 0 || size > 1) {
             throw new UsernameNotFoundException("记录" + mobile + "不存在");
         }
         FindResult res = list.get(0);
-        return new SecurityUser(res.getUid(), res.getMobile(), "{noop}" + "123456");
+        // 电话号码作为用户名
+        String name = res.getMobile();
+        // 上次登录时间作为密码
+        long time = res.getLastLoginTime().getTime();
+        return new SecurityUser(res.getUid(), name, "{noop}" + time);
     }
 }

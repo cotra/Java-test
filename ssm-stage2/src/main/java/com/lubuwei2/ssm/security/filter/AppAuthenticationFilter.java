@@ -18,7 +18,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 
 @Component
 public class AppAuthenticationFilter extends OncePerRequestFilter {
@@ -49,8 +48,9 @@ public class AppAuthenticationFilter extends OncePerRequestFilter {
                 Claims body = claimsJws.getBody();
                 // 电话号码
                 String mobile = body.getAudience();
-                //
-                return new UsernamePasswordAuthenticationToken(mobile, "123456");
+                // 授权时间
+                long time = body.getIssuedAt().getTime();
+                return new UsernamePasswordAuthenticationToken(mobile, time);
             }
             return null;
         }

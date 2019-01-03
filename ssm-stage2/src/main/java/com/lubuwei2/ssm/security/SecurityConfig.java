@@ -6,6 +6,7 @@ import com.lubuwei2.ssm.security.service.AppUserDetailsService;
 import com.lubuwei2.ssm.security.handler.AppAccessDeniedHandler;
 import com.lubuwei2.ssm.security.handler.AppAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,6 +15,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Value("${env.security}")
+    private String securityControl;
 
     @Autowired
     private AppUserDetailsService appUserDetailsService;
@@ -34,8 +38,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 自定义异常处理
         HttpSecurity handler = security.exceptionHandling().authenticationEntryPoint(new AppAuthenticationEntryPoint()).accessDeniedHandler(new AppAccessDeniedHandler()).and();
         // 规则
-        HttpSecurity role = handler.authorizeRequests().antMatchers(PathConfig.API_SECURITY + "*", PathConfig.API_VERIFICATION + "*").permitAll().anyRequest().authenticated().and();
-        // 认证过滤器
-        role.addFilterBefore(appAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        if(securityControl.equals("on")) {
+            HttpSecurity role = handler.authorizeRequests().antMatchers(PathConfig.API_SECURITY + "*", PathConfig.API_VERIFICATION + "*").permitAll().anyRequest().authenticated().and();
+            // 认证过滤器
+            role.addFilterBefore(appAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        } else {
+            handler.authorizeRequests().anyRequest().permitAll();
+        }
     }
 }

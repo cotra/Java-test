@@ -59,5 +59,13 @@
         <include refid="table"/>
         where mobile = #{mobile} and password = #{password} and is_delete = 0
     </select>
-    <!--update-->
+    <!--updateByMobileAndPassword-->
+    <update id="updateByMobileAndPassword" parameterType="User">
+        update
+        <include refid="table"/>
+        <set>
+            <if test="lastLoginTime != null">last_login_time = #{lastLoginTime}</if>
+        </set>
+        where mobile = #{mobile} and password = #{password} and is_delete = 0
+    </update>
 </mapper>

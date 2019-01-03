@@ -18,5 +18,6 @@ public interface SecurityDao extends BasicMapper<User>, FindMapper<User, FindRes
     // 根据手机号和密码
     List<FindResult> findByMobileAndPassword(User user);
 
-
+    // 根据手机号和密码更新
+    Integer updateByMobileAndPassword(User user);
 }
