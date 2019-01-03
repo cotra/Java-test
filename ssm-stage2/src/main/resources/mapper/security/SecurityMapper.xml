@@ -13,13 +13,13 @@
         <id column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP"/>
         <id column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+    <!--cell-->
+    <sql id="cell">
+        uid, real_name, nickname, mobile, email, password, last_login_time, create_time
+    </sql>
     <!--table-->
     <sql id="table">
         users
-    </sql>
-    <!--table-->
-    <sql id="cell">
-        uid, real_name, nickname, mobile, email, password, last_login_time, create_time
     </sql>
     <!--find-->
     <select id="find" parameterType="User" resultMap="BasicResult">

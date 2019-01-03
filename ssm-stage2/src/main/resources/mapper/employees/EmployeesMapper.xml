@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lubuwei2.ssm.modules.employees.EmployeesDao">
+    <!--result map-->
+    <resultMap id="BasicResult" type="com.lubuwei2.ssm.modules.employees.dto.FindResult">
+        <id column="emp_no" property="empNo" jdbcType="BIGINT" />
+        <id column="birth_date" property="birthDate" jdbcType="DATE"/>
+        <id column="first_name" property="FirstName" jdbcType="VARCHAR"/>
+        <id column="last_name" property="LastName" jdbcType="VARCHAR"/>
+        <id column="gender" property="gender" jdbcType="INTEGER"/>
+        <id column="hire_date" property="hireDate" jdbcType="DATE"/>
+        <id column="eid" property="eid" jdbcType="BIGINT"/>
+    </resultMap>
+    <!--cell-->
+    <sql id="cell">
+        emp_no, birth_date, first_name, last_name, gender, hire_date, eid
+    </sql>
+    <!--table-->
+    <sql id="table">
+        employees
+    </sql>
+    <!--find-->
+    <select id="find" parameterType="Employee" resultMap="BasicResult">
+        select
+        <include refid="cell"/>
+        from
+        <include refid="table"/>
+        <!--<where>-->
+            <!--is_delete = 0-->
+        <!--</where>-->
+    </select>
+</mapper>
