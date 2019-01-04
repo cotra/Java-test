@@ -4,7 +4,7 @@
 <mapper namespace="com.lubuwei2.ssm.modules.employees.EmployeesDao">
     <!--result map-->
     <resultMap id="BasicResult" type="com.lubuwei2.ssm.modules.employees.dto.FindResult">
-        <id column="emp_no" property="empNo" jdbcType="BIGINT" />
+        <id column="emp_no" property="empNo" jdbcType="VARCHAR" />
         <id column="birth_date" property="birthDate" jdbcType="DATE"/>
         <id column="first_name" property="FirstName" jdbcType="VARCHAR"/>
         <id column="last_name" property="LastName" jdbcType="VARCHAR"/>

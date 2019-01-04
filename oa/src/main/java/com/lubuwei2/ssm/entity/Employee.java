@@ -7,7 +7,7 @@ import java.sql.Date;
 
 @Alias("Employee")
 public class Employee implements Serializable {
-    private Long empNo;
+    private String empNo;
     private Date birthDate;
     private String FirstName;
     private String LastName;
@@ -15,11 +15,11 @@ public class Employee implements Serializable {
     private Date hireDate;
     private Long eid;
 
-    public Long getEmpNo() {
+    public String getEmpNo() {
         return empNo;
     }
 
-    public void setEmpNo(Long empNo) {
+    public void setEmpNo(String empNo) {
         this.empNo = empNo;
     }
 
