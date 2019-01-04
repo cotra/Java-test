@@ -30,4 +30,12 @@
             <!--is_delete = 0-->
         <!--</where>-->
     </select>
+    <!--save-->
+    <insert id="save" parameterType="Employee" useGeneratedKeys="true" keyProperty="eid">
+        insert into
+        <include refid="table"/>
+        (emp_no, birth_date, first_name, last_name, gender, hire_date)
+        values
+        (#{empNo}, #{birthDate}, #{FirstName}, #{LastName}, #{gender}, #{hireDate})
+    </insert>
 </mapper>

@@ -2,6 +2,7 @@ package com.lubuwei2.ssm.modules.employees;
 
 import com.lubuwei2.ssm.entity.Employee;
 import com.lubuwei2.ssm.modules.order.domain.OrderBasicResult;
+import com.lubuwei2.ssm.utils.TimeUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,17 @@ public class EmployeesDaoTest {
         Employee employee = new Employee();
         List<OrderBasicResult> list = dao.find(employee);
         assertNotNull(list);
+    }
+
+    @Test
+    public void save() {
+        Employee employee = new Employee();
+        employee.setEmpNo("100056000");
+        employee.setBirthDate(TimeUtils.letDateToSqlDate());
+        employee.setHireDate(TimeUtils.letDateToSqlDate());
+        employee.setFirstName("tet");
+        employee.setLastName("dgd");
+        employee.setGender(1);
+        dao.save(employee);
     }
 }

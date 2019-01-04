@@ -16,6 +16,12 @@ public class TimeUtils {
         return new Timestamp(date.getTime());
     }
 
+    // Date转sql的Date
+    public static java.sql.Date letDateToSqlDate() {
+        Date date = new Date();
+        return new java.sql.Date(date.getTime());
+    }
+
     public static Date addMonths(int months) {
         Date date = new Date();
         GregorianCalendar calendar = new GregorianCalendar();

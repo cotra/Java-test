@@ -10,7 +10,12 @@ import static org.junit.Assert.*;
 public class TimeUtilsTest {
 
     @Test
-    public void addOneYear() {
+    public void letDateToSqlDate() {
+        System.out.println(TimeUtils.letDateToSqlDate());
+    }
+
+    @Test
+    public void addMonths() {
         Date date = TimeUtils.addMonths(13);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }

@@ -10,7 +10,7 @@
     </resultMap>
     <!--table-->
     <sql id="table">
-        order
+        orders
     </sql>
     <!--table-->
     <sql id="cell">
