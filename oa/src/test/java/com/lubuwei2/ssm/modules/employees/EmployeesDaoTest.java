@@ -1,7 +1,9 @@
 package com.lubuwei2.ssm.modules.employees;
 
 import com.lubuwei2.ssm.entity.Employee;
+import com.lubuwei2.ssm.modules.employees.dto.EmployeesResult;
 import com.lubuwei2.ssm.modules.order.domain.OrderBasicResult;
+import com.lubuwei2.ssm.modules.security.dto.FindResult;
 import com.lubuwei2.ssm.utils.TimeUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +25,8 @@ public class EmployeesDaoTest {
     @Test
     public void find() {
         Employee employee = new Employee();
-        List<OrderBasicResult> list = dao.find(employee);
+        List<EmployeesResult> list = dao.find(employee);
+        System.out.println(list.size());
         assertNotNull(list);
     }
 

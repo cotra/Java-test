@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lubuwei2.ssm.modules.employees.EmployeesDao">
     <!--result map-->
-    <resultMap id="BasicResult" type="com.lubuwei2.ssm.modules.employees.dto.FindResult">
+    <resultMap id="BasicResult" type="com.lubuwei2.ssm.modules.employees.dto.EmployeesResult">
         <id column="emp_no" property="empNo" jdbcType="VARCHAR" />
         <id column="birth_date" property="birthDate" jdbcType="DATE"/>
         <id column="first_name" property="FirstName" jdbcType="VARCHAR"/>
@@ -26,9 +26,9 @@
         <include refid="cell"/>
         from
         <include refid="table"/>
-        <!--<where>-->
-            <!--is_delete = 0-->
-        <!--</where>-->
+        <where>
+            is_delete = 0
+        </where>
     </select>
     <!--save-->
     <insert id="save" parameterType="Employee" useGeneratedKeys="true" keyProperty="eid">

@@ -3,7 +3,7 @@ package com.lubuwei2.ssm.modules.employees.dto;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-public class FindResult {
+public class EmployeesResult {
     private Long empNo;
     private Date birthDate;
     private String FirstName;
