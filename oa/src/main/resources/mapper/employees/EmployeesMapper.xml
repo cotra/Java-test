@@ -22,12 +22,17 @@
     </sql>
     <!--find-->
     <select id="find" parameterType="Employee" resultMap="BasicResult">
-        select
+        SELECT
         <include refid="cell"/>
-        from
+        FROM
         <include refid="table"/>
         <where>
-            is_delete = 0
+            <if test="firstName != ''">
+                (first_name LIKE #{firstName})
+            </if>
+            <if test="lastName != ''">
+                AND (last_name LIKE #{lastName})
+            </if>
         </where>
     </select>
     <!--save-->

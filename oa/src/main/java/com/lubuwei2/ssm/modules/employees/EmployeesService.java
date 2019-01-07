@@ -16,10 +16,20 @@ class EmployeesService {
     @Autowired
     EmployeesDao dao;
 
-    @Cacheable(value = "employeesList")
+//    @Cacheable(value = "employeesList")
     public PageList<EmployeesResult> find(Employee employee, Integer page, Integer rows) {
         PageUtils.setPage(page, rows);
+
+        // 模糊查询
+        if (employee.getFirstName().trim().length() != 0) {
+            employee.setFirstName("%" + employee.getFirstName() +"%");
+        }
+        if (employee.getLastName().trim().length() != 0) {
+            employee.setLastName("%" + employee.getLastName() +"%");
+        }
+
         List<EmployeesResult> list = dao.find(employee);
+
         PageList<EmployeesResult> pageList = PageUtils.create(list);
         return pageList;
     }

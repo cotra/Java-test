@@ -10,6 +10,16 @@ public class FindReq {
     private Integer rows;
     @NotNull(message = "缺少参数 firstName")
     private String firstName;
+    @NotNull(message = "缺少参数 lastName")
+    private String lastName;
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getFirstName() {
         return firstName;
