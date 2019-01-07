@@ -2,22 +2,21 @@ package com.lubuwei2.ssm.modules.employees.dto;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Timestamp;
 
 public class EmployeesResult implements Serializable {
-    private Long empNo;
+    private Long eid;
+    private String empNo;
     private Date birthDate;
     private String FirstName;
     private String LastName;
     private Integer gender;
     private Date hireDate;
-    private Long eid;
 
-    public Long getEmpNo() {
+    public String getEmpNo() {
         return empNo;
     }
 
-    public void setEmpNo(Long empNo) {
+    public void setEmpNo(String empNo) {
         this.empNo = empNo;
     }
 

@@ -6,8 +6,8 @@
     <resultMap id="BasicResult" type="com.lubuwei2.ssm.modules.employees.dto.EmployeesResult">
         <id column="emp_no" property="empNo" jdbcType="VARCHAR" />
         <id column="birth_date" property="birthDate" jdbcType="DATE"/>
-        <id column="first_name" property="FirstName" jdbcType="VARCHAR"/>
-        <id column="last_name" property="LastName" jdbcType="VARCHAR"/>
+        <id column="first_name" property="firstName" jdbcType="VARCHAR"/>
+        <id column="last_name" property="lastName" jdbcType="VARCHAR"/>
         <id column="gender" property="gender" jdbcType="INTEGER"/>
         <id column="hire_date" property="hireDate" jdbcType="DATE"/>
         <id column="eid" property="eid" jdbcType="BIGINT"/>
@@ -36,6 +36,6 @@
         <include refid="table"/>
         (emp_no, birth_date, first_name, last_name, gender, hire_date)
         values
-        (#{empNo}, #{birthDate}, #{FirstName}, #{LastName}, #{gender}, #{hireDate})
+        (#{empNo}, #{birthDate}, #{firstName}, #{lastName}, #{gender}, #{hireDate})
     </insert>
 </mapper>

@@ -32,7 +32,8 @@ public class RedisConfig extends CachingConfigurerSupport {
                     // 同样的参数
                     sb.append(JsonUtils.objToString(obj).hashCode());
                 }
-                return sb.toString();
+                String str = sb.toString();
+                return str;
             }
         };
     }

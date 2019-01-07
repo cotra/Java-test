@@ -9,8 +9,8 @@ import java.sql.Date;
 public class Employee implements Serializable {
     private String empNo;
     private Date birthDate;
-    private String FirstName;
-    private String LastName;
+    private String firstName;
+    private String lastName;
     private Integer gender;
     private Date hireDate;
     private Long eid;
@@ -41,19 +41,19 @@ public class Employee implements Serializable {
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
-        FirstName = firstName;
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     public Integer getGender() {

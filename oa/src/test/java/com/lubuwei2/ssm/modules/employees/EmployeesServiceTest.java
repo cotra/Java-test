@@ -2,6 +2,7 @@ package com.lubuwei2.ssm.modules.employees;
 
 import com.lubuwei2.ssm.entity.Employee;
 import com.lubuwei2.ssm.modules.employees.dto.EmployeesResult;
+import com.lubuwei2.ssm.utils.pagination.PageList;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,7 @@ public class EmployeesServiceTest {
     @Test
     public void find() {
         Employee employee = new Employee();
-        List<EmployeesResult> list = service.find(employee);
-        System.out.println(list.size());
-        assertNotNull(list);
+        PageList<EmployeesResult> pageList = service.find(employee, 1, 30);
+        assertNotNull(pageList);
     }
 }

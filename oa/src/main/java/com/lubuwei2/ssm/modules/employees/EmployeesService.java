@@ -2,6 +2,8 @@ package com.lubuwei2.ssm.modules.employees;
 
 import com.lubuwei2.ssm.entity.Employee;
 import com.lubuwei2.ssm.modules.employees.dto.EmployeesResult;;
+import com.lubuwei2.ssm.utils.pagination.PageList;
+import com.lubuwei2.ssm.utils.pagination.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -15,8 +17,10 @@ class EmployeesService {
     EmployeesDao dao;
 
     @Cacheable(value = "employeesList")
-    public List<EmployeesResult> find(Employee employee) {
+    public PageList<EmployeesResult> find(Employee employee, Integer page, Integer rows) {
+        PageUtils.setPage(page, rows);
         List<EmployeesResult> list = dao.find(employee);
-        return list;
+        PageList<EmployeesResult> pageList = PageUtils.create(list);
+        return pageList;
     }
 }
