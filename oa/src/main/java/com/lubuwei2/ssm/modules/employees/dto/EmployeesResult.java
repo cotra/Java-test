@@ -1,9 +1,10 @@
 package com.lubuwei2.ssm.modules.employees.dto;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-public class EmployeesResult {
+public class EmployeesResult implements Serializable {
     private Long empNo;
     private Date birthDate;
     private String FirstName;

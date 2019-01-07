@@ -1,4 +1,4 @@
-package com.lubuwei2.ssm.domain;
+package com.lubuwei2.ssm.utils.pagination;
 
 import java.io.Serializable;
 import java.util.List;

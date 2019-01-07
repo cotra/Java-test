@@ -14,6 +14,15 @@ public class Employee implements Serializable {
     private Integer gender;
     private Date hireDate;
     private Long eid;
+    private Integer isDelete;
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
 
     public String getEmpNo() {
         return empNo;
