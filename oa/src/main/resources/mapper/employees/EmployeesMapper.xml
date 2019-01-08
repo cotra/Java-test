@@ -56,6 +56,33 @@
             where eid=#{item.eid} AND is_delete = 0
         </foreach>
     </update>
+    <!--logicDelete-->
+    <update id="logicDelete" parameterType="Employee">
+        update <include refid="table"/>
+        <set>is_delete = 1</set>
+        WHERE eid = #{eid} AND is_delete = 0
+    </update>
+    <!--logicDeleteBatch-->
+    <update id="logicDeleteBatch" parameterType="List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update <include refid="table"/>
+            <set>is_delete = 1</set>
+            where eid = #{item.eid} AND is_delete = 0
+        </foreach>
+    </update>
+    <!--delete-->
+    <delete id="delete" parameterType="Employee">
+        DELETE FROM <include refid="table"/> WHERE eid = #{eid}
+    </delete>
+    <!--deleteBatch-->
+    <delete id="deleteBatch" parameterType="List">
+        DELETE FROM <include refid="table"/> WHERE eid IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">#{item.eid}</foreach>
+    </delete>
+    <!--count-->
+    <select id="count" resultType="Long">
+        SELECT count(1) FROM <include refid="table"/>
+    </select>
     <!--find-->
     <select id="find" parameterType="Employee" resultMap="BasicResult">
         SELECT <include refid="cell"/> FROM <include refid="table"/>
@@ -63,6 +90,13 @@
             is_delete = 0
             <if test="firstName != ''">AND (first_name LIKE #{firstName})</if>
             <if test="lastName != ''">AND (last_name LIKE #{lastName})</if>
+        </where>
+    </select>
+    <!--findByPK-->
+    <select id="findByPK" parameterType="Long" resultMap="BasicResult">
+        SELECT <include refid="cell"/> FROM <include refid="table"/>
+        <where>
+            is_delete = 0 AND eid = #{id}
         </where>
     </select>
 </mapper>

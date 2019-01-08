@@ -27,4 +27,10 @@ public class EmployeesController {
         // 返回
         return ApiGenerator.ok(pageList);
     }
+
+    @PostMapping("delete")
+    public Api<String> delete(@RequestBody @Validated FindReq req) {
+        // 返回
+        return ApiGenerator.ok();
+    }
 }

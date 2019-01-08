@@ -11,13 +11,13 @@ public interface BasicMapper<T> {
 
     Integer updateBatch(List list);
 
+    Integer logicDelete(T domain);
+
+    Integer logicDeleteBatch(List list);
+
     Integer delete(T domain);
 
     Integer deleteBatch(List list);
-
-    Integer deleteByPK(Long id);
-
-    Integer deleteAll();
 
     Long count();
 }
