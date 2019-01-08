@@ -16,7 +16,7 @@ class EmployeesService {
     @Autowired
     EmployeesDao dao;
 
-//    @Cacheable(value = "employeesList")
+    @Cacheable(value = "employeesList")
     public PageList<EmployeesResult> find(Employee employee, Integer page, Integer rows) {
         PageUtils.setPage(page, rows);
 

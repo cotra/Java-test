@@ -17,30 +17,52 @@
         emp_no, birth_date, first_name, last_name, gender, hire_date, eid
     </sql>
     <!--table-->
-    <sql id="table">
-        employees
-    </sql>
-    <!--find-->
-    <select id="find" parameterType="Employee" resultMap="BasicResult">
-        SELECT
-        <include refid="cell"/>
-        FROM
-        <include refid="table"/>
-        <where>
-            <if test="firstName != ''">
-                (first_name LIKE #{firstName})
-            </if>
-            <if test="lastName != ''">
-                AND (last_name LIKE #{lastName})
-            </if>
-        </where>
-    </select>
+    <sql id="table">employees</sql>
     <!--save-->
     <insert id="save" parameterType="Employee" useGeneratedKeys="true" keyProperty="eid">
-        insert into
-        <include refid="table"/>
+        insert into <include refid="table"/>
         (emp_no, birth_date, first_name, last_name, gender, hire_date)
         values
         (#{empNo}, #{birthDate}, #{firstName}, #{lastName}, #{gender}, #{hireDate})
     </insert>
+    <!--saveBatch-->
+    <insert id="saveBatch" parameterType="List" useGeneratedKeys="true" keyProperty="eid">
+        INSERT INTO <include refid="table"/>
+        (emp_no, birth_date, first_name, last_name, gender, hire_date)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.empNo}, #{item.birthDate}, #{item.firstName}, #{item.lastName}, #{item.gender}, #{item.hireDate})
+        </foreach>
+    </insert>
+    <!--update-->
+    <update id="update" parameterType="Employee">
+        update <include refid="table"/>
+        <set>
+            <if test="firstName != null">first_name=#{firstName},</if>
+            <if test="lastName != null">last_name=#{lastName},</if>
+            <if test="gender != null">gender=#{gender}</if>
+        </set>
+        where eid=#{eid} AND is_delete = 0
+    </update>
+    <!--updateBatch-->
+    <update id="updateBatch" parameterType="List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update <include refid="table"/>
+            <set>
+                <if test="item.firstName != null">first_name=#{item.firstName},</if>
+                <if test="item.lastName != null">last_name=#{item.lastName},</if>
+                <if test="item.gender != null">gender=#{item.gender}</if>
+            </set>
+            where eid=#{item.eid} AND is_delete = 0
+        </foreach>
+    </update>
+    <!--find-->
+    <select id="find" parameterType="Employee" resultMap="BasicResult">
+        SELECT <include refid="cell"/> FROM <include refid="table"/>
+        <where>
+            is_delete = 0
+            <if test="firstName != ''">AND (first_name LIKE #{firstName})</if>
+            <if test="lastName != ''">AND (last_name LIKE #{lastName})</if>
+        </where>
+    </select>
 </mapper>

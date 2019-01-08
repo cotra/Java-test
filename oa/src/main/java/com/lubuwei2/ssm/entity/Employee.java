@@ -16,14 +16,6 @@ public class Employee implements Serializable {
     private Long eid;
     private Integer isDelete;
 
-    public Integer getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
-    }
-
     public String getEmpNo() {
         return empNo;
     }
@@ -78,5 +70,13 @@ public class Employee implements Serializable {
 
     public void setEid(Long eid) {
         this.eid = eid;
+    }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
     }
 }

@@ -1,6 +1,5 @@
 package com.lubuwei2.ssm.modules.employees.domain;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class FindReq {
