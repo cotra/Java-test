@@ -13,6 +13,7 @@ import com.lubuwei2.ssm.modules.security.dto.Login;
 import com.lubuwei2.ssm.modules.security.dto.Register;
 import com.lubuwei2.ssm.security.jwt.JwtGenerator;
 import com.lubuwei2.ssm.utils.ListUtils;
+import com.lubuwei2.ssm.utils.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
@@ -47,13 +48,13 @@ public class SecurityController {
         }
         User user = ListUtils.entityToModel(req, User.class);
         Register dto = service.register(user);
-        if (dto.getFlag() == Flag.OK) {
-            RegisterRes res = new RegisterRes(dto.getUid());
-            return ApiGenerator.ok(res);
-        }
-        if (dto.getFlag() == Flag.USER_EXISTS) {
-            return ApiGenerator.fail("用户已经存在");
-        }
+//        if (dto.getFlag() == Flag.OK) {
+//            RegisterRes res = new RegisterRes(dto.getUid());
+//            return ApiGenerator.ok(res);
+//        }
+//        if (dto.getFlag() == Flag.USER_EXISTS) {
+//            return ApiGenerator.fail("用户已经存在");
+//        }
         // 默认
         return ApiGenerator.fail();
     }
@@ -64,19 +65,20 @@ public class SecurityController {
      */
     @PostMapping("login")
     public Api<LoginRes> login(@RequestBody @Validated LoginReq req) {
-        Login dto = service.checkAndLogin(req.getKey(), req.getPassword());
-//        Account account = ListUtils.entityToModel(req, Account.class);
+        // TODO 验证码效验
+
+        // 登录
+        Login dto = service.login(req.getKey(), req.getPassword());
         if (dto.getFlag() == Flag.OK) {
-            LoginRes res = ListUtils.entityToModel(null, LoginRes.class);
+            LoginRes res = dto.getRes();
             // 根据返回用户信息生成jwt
-            Date iat = new Date(); // 签发时间
-            String token = jwt.create(res.getMobile(), iat);
+            String token = jwt.create(res.getUsername(), TimeUtils.sqlTimestampToDate(res.getLastLoginTime()));
             res.setToken(token);
-            // 返回
-            return ApiGenerator.ok(res);
+//            // 返回
+            return ApiGenerator.ok(dto.getRes());
         }
         // 默认
-        return ApiGenerator.fail();
+        return ApiGenerator.fail(dto.getFlag());
     }
 
 

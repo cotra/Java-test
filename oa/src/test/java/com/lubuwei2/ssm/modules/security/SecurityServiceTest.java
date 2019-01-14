@@ -1,9 +1,6 @@
 package com.lubuwei2.ssm.modules.security;
 
-import com.lubuwei2.ssm.entity.User;
 import com.lubuwei2.ssm.modules.security.dto.Login;
-import com.lubuwei2.ssm.utils.MD5Utils;
-import com.lubuwei2.ssm.utils.TimeUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +18,7 @@ public class SecurityServiceTest {
 
     @Test
     public void login() {
-//        User user = new User();
-//        user.setMobile("15012345678");
-//        user.setPassword("123456");
-//
-//        Login login = service.login(null);
-//        System.out.println(login.getFlag());
+        Login login = service.login("100", "123456");
+        System.out.println(login.getFlag() + " | " + login.getRes().getRealName());
     }
 }

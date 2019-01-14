@@ -4,28 +4,29 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class LoginRes implements Serializable {
-    private Long uid;
-    private String token;
+    private Long eid;
+    private String empNo;
     private String realName;
-    private String nickname;
+    private Integer gender;
     private String mobile;
-    private String email;
-    private Timestamp createTime;
+    private String username;
+    private Timestamp lastLoginTime;
+    private String token;
 
-    public String getToken() {
-        return token;
+    public Long getEid() {
+        return eid;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setEid(Long eid) {
+        this.eid = eid;
     }
 
-    public Long getUid() {
-        return uid;
+    public String getEmpNo() {
+        return empNo;
     }
 
-    public void setUid(Long uid) {
-        this.uid = uid;
+    public void setEmpNo(String empNo) {
+        this.empNo = empNo;
     }
 
     public String getRealName() {
@@ -36,12 +37,12 @@ public class LoginRes implements Serializable {
         this.realName = realName;
     }
 
-    public String getNickname() {
-        return nickname;
+    public Integer getGender() {
+        return gender;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setGender(Integer gender) {
+        this.gender = gender;
     }
 
     public String getMobile() {
@@ -52,19 +53,27 @@ public class LoginRes implements Serializable {
         this.mobile = mobile;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Timestamp getCreateTime() {
-        return createTime;
+    public Timestamp getLastLoginTime() {
+        return lastLoginTime;
     }
 
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
+    public void setLastLoginTime(Timestamp lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

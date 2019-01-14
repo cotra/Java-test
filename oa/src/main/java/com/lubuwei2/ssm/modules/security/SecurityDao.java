@@ -1,7 +1,7 @@
 package com.lubuwei2.ssm.modules.security;
 
 import com.lubuwei2.ssm.entity.Account;
-import com.lubuwei2.ssm.modules.security.dto.LoginResult;
+import com.lubuwei2.ssm.modules.security.domain.LoginRes;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -17,8 +17,8 @@ public interface SecurityDao {
     Integer updateByUsernameAndPwd(Account account);
 
     // 登录成功后返回
-    List<LoginResult> findAfterLoginByEid(Long eid);
+    List<LoginRes> findAfterLoginByEid(Long eid);
 
     // 登录成功后返回
-    List<LoginResult> findAfterLoginByUsername(String username);
+    List<LoginRes> findAfterLoginByUsername(String username);
 }

@@ -3,7 +3,7 @@ package com.lubuwei2.ssm.modules.security.domain;
 import javax.validation.constraints.NotBlank;
 
 public class LoginReq {
-    @NotBlank(message = "登录名不能为空")
+    @NotBlank(message = "账户名不能为空")
     private String key;
     @NotBlank(message = "密码不能为空")
     private String password;

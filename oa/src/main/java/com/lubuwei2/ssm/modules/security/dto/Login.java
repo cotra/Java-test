@@ -1,22 +1,24 @@
 package com.lubuwei2.ssm.modules.security.dto;
 
-public class Login {
-    private Integer flag;
-    private LoginResult result;
+import com.lubuwei2.ssm.modules.security.domain.LoginRes;
 
-    public Integer getFlag() {
+public class Login {
+    private String flag;
+    private LoginRes res;
+
+    public String getFlag() {
         return flag;
     }
 
-    public void setFlag(Integer flag) {
+    public void setFlag(String flag) {
         this.flag = flag;
     }
 
-    public LoginResult getResult() {
-        return result;
+    public LoginRes getRes() {
+        return res;
     }
 
-    public void setResult(LoginResult result) {
-        this.result = result;
+    public void setRes(LoginRes res) {
+        this.res = res;
     }
 }

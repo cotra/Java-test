@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lubuwei2.ssm.dao.PublicSecurityDao">
+    <!--result map-->
+    <resultMap id="BasicResult" type="com.lubuwei2.ssm.entity.Account">
+        <id column="eid" property="eid" jdbcType="BIGINT" />
+        <id column="username" property="username" jdbcType="VARCHAR"/>
+        <id column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--cell-->
+    <sql id="cell">
+        eid, username, last_login_time
+    </sql>
+    <!--table-->
+    <sql id="table">accounts</sql>
+    <!--findByMobile-->
+    <select id="findByUsername" parameterType="Account" resultMap="BasicResult">
+        select <include refid="cell"/>
+        from <include refid="table"/>
+        where username = #{username}
+    </select>
+</mapper>

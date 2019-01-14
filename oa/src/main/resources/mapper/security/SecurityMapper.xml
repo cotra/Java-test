@@ -24,21 +24,18 @@
     </update>
 
     <!--登录成功后返回全部-->
-    <resultMap id="LoginResult" type="com.lubuwei2.ssm.modules.security.dto.LoginResult">
+    <resultMap id="LoginResult" type="com.lubuwei2.ssm.modules.security.domain.LoginRes">
         <id column="eid" property="eid" jdbcType="BIGINT" />
         <id column="emp_no" property="empNo" jdbcType="VARCHAR" />
         <id column="real_name" property="realName" jdbcType="VARCHAR"/>
-        <id column="birth_date" property="birthDate" jdbcType="DATE"/>
         <id column="gender" property="gender" jdbcType="INTEGER"/>
         <id column="mobile" property="mobile" jdbcType="VARCHAR"/>
-        <id column="hire_date" property="hireDate" jdbcType="DATE"/>
-        <id column="aid" property="aid" jdbcType="BIGINT" />
         <id column="username" property="username" jdbcType="VARCHAR"/>
         <id column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <!--cell-->
     <sql id="cell">
-      e.eid, e.emp_no, e.real_name, e.birth_date, e.gender, e.mobile, e.hire_date, a.aid, a.username, a.last_login_time
+      e.eid, e.emp_no, e.real_name, e.gender, e.mobile, a.username, a.last_login_time
     </sql>
     <select id="findAfterLoginByEid" parameterType="Long" resultMap="LoginResult">
         SELECT  <include refid="cell"/>

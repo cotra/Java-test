@@ -22,6 +22,12 @@ public class TimeUtils {
         return new java.sql.Date(date.getTime());
     }
 
+    public static Date sqlTimestampToDate(Timestamp time) {
+        return time;
+    }
+
+
+    // 添加一定的月份
     public static Date addMonths(int months) {
         Date date = new Date();
         GregorianCalendar calendar = new GregorianCalendar();

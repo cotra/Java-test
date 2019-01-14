@@ -10,13 +10,13 @@ import java.util.Set;
 
 public class SecurityUser implements UserDetails {
 
-    private Long uid;
+    private Long id;
     private String username;
     private String password;
     private Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 
-    public SecurityUser(Long uid, String username, String password) {
-        this.uid = uid;
+    public SecurityUser(Long id, String username, String password) {
+        this.id = id;
         this.password = password;
         this.username = username;
     }

@@ -2,11 +2,13 @@ package com.lubuwei2.ssm.modules.security.dto;
 
 public class Flag {
     // 成功
-    public static final Integer OK = 0;
-    // 已经存在这个手机号码的用户
-    public static final Integer USER_EXISTS = -1;
-    // 用户不是唯一
-    public static final Integer USER_MORE_ONE = -2;
-    // 用户或密码错误
-    public static final Integer ACCOUNT_OR_PASSWORD_ERROR = -3;
+    public static final String OK = "OK";
+
+    public static final String USER_EXISTS = "该用户名已经被注册";
+
+    public static final String USER_MORE_ONE = "记录唯一性错误";
+
+    public static final String ACCOUNT_OR_PASSWORD_ERROR = "账户名或密码错误";
+
+    public static final String NO_EMPLOYEE = "没有查询到员工信息";
 }

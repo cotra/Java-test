@@ -50,11 +50,11 @@ public class AppAuthenticationFilter extends OncePerRequestFilter {
             Jws<Claims> claimsJws = jwt.read(token);
             if(claimsJws != null) {
                 Claims body = claimsJws.getBody();
-                // 电话号码
-                String mobile = body.getAudience();
+                // 账户名
+                String username = body.getAudience();
                 // 授权时间
                 long time = body.getIssuedAt().getTime();
-                return new UsernamePasswordAuthenticationToken(mobile, time);
+                return new UsernamePasswordAuthenticationToken(username, time);
             }
             return null;
         }
