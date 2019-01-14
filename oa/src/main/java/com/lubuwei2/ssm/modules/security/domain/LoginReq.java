@@ -3,19 +3,19 @@ package com.lubuwei2.ssm.modules.security.domain;
 import javax.validation.constraints.NotBlank;
 
 public class LoginReq {
-    @NotBlank(message = "电话不能为空")
-    private String mobile;
-    @NotBlank(message = "密码能为空")
+    @NotBlank(message = "登录名不能为空")
+    private String key;
+    @NotBlank(message = "密码不能为空")
     private String password;
-    @NotBlank(message = "验证码能为空")
+    @NotBlank(message = "验证码不能为空")
     private String code;
 
-    public String getMobile() {
-        return mobile;
+    public String getKey() {
+        return key;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getPassword() {

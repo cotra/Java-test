@@ -1,12 +1,9 @@
-package com.lubuwei2.ssm.entity;
+package com.lubuwei2.ssm.modules.security.dto;
 
-import org.apache.ibatis.type.Alias;
-
-import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
-@Alias("Employee")
-public class Employee implements Serializable {
+public class LoginResult {
     private Long eid;
     private String empNo;
     private String realName;
@@ -14,7 +11,9 @@ public class Employee implements Serializable {
     private Integer gender;
     private String mobile;
     private Date hireDate;
-    private Integer isDelete;
+    private Long aid;
+    private String username;
+    private Timestamp lastLoginTime;
 
     public Long getEid() {
         return eid;
@@ -72,11 +71,27 @@ public class Employee implements Serializable {
         this.hireDate = hireDate;
     }
 
-    public Integer getIsDelete() {
-        return isDelete;
+    public Long getAid() {
+        return aid;
     }
 
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
+    public void setAid(Long aid) {
+        this.aid = aid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Timestamp getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Timestamp lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 }

@@ -76,11 +76,11 @@ public class EmployeesDaoTest {
     @Test
     public void updateBatch() {
         Employee employee1 = new Employee();
-        employee1.setFirstName("hte1");
+        employee1.setRealName("hte1");
         employee1.setEid(1L);
 
         Employee employee2 = new Employee();
-        employee2.setFirstName("htt2");
+        employee2.setRealName("htt2");
         employee2.setEid(2L);
 
         List<Employee> list = new ArrayList<>();
@@ -92,7 +92,7 @@ public class EmployeesDaoTest {
     @Test
     public void update() {
         Employee employee = new Employee();
-        employee.setFirstName("sdf12131");
+        employee.setRealName("sdf12131");
         employee.setEid(1L);
         List<Employee> list = new ArrayList<>();
         list.add(employee);
@@ -133,12 +133,14 @@ public class EmployeesDaoTest {
 
     private Employee createEntity() {
         Employee employee = new Employee();
-        employee.setEmpNo("100056000");
+        employee.setEmpNo("100");
+        employee.setRealName("tet");
         employee.setBirthDate(TimeUtils.letDateToSqlDate());
-        employee.setHireDate(TimeUtils.letDateToSqlDate());
-        employee.setFirstName("tet");
-        employee.setLastName("dgd");
         employee.setGender(1);
+        employee.setMobile("15008260209");
+        employee.setHireDate(TimeUtils.letDateToSqlDate());
+
+
         return employee;
     }
 }

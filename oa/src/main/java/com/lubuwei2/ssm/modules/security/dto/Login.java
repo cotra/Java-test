@@ -1,9 +1,8 @@
 package com.lubuwei2.ssm.modules.security.dto;
 
-
 public class Login {
     private Integer flag;
-    private FindResult user;
+    private LoginResult result;
 
     public Integer getFlag() {
         return flag;
@@ -13,11 +12,11 @@ public class Login {
         this.flag = flag;
     }
 
-    public FindResult getUser() {
-        return user;
+    public LoginResult getResult() {
+        return result;
     }
 
-    public void setUser(FindResult user) {
-        this.user = user;
+    public void setResult(LoginResult result) {
+        this.result = result;
     }
 }

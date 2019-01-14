@@ -37,6 +37,9 @@ public class SecurityController {
     @Autowired
     JwtGenerator jwt;
 
+    /**
+     * 注册登录账户名不能为纯数字,不能有@等特殊字符,只能是字母或字母+数字
+     */
     @PostMapping("register")
     public Api<RegisterRes> register(@RequestBody @Validated RegisterReq req, HttpSession session) {
         if (session.getAttribute("userReg") != null) {
@@ -56,16 +59,15 @@ public class SecurityController {
     }
 
     /**
+     * 11位电话号码,账户,员工号登录
      * 登录成功后返回用户信息和一个jwt
-     * @param req
-     * @return
      */
     @PostMapping("login")
     public Api<LoginRes> login(@RequestBody @Validated LoginReq req) {
-        User user = ListUtils.entityToModel(req, User.class);
-        Login dto = service.login(user);
+        Login dto = service.checkAndLogin(req.getKey(), req.getPassword());
+//        Account account = ListUtils.entityToModel(req, Account.class);
         if (dto.getFlag() == Flag.OK) {
-            LoginRes res = ListUtils.entityToModel(dto.getUser(), LoginRes.class);
+            LoginRes res = ListUtils.entityToModel(null, LoginRes.class);
             // 根据返回用户信息生成jwt
             Date iat = new Date(); // 签发时间
             String token = jwt.create(res.getMobile(), iat);

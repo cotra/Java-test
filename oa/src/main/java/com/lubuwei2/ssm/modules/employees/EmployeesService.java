@@ -21,11 +21,8 @@ class EmployeesService {
         PageUtils.setPage(page, rows);
 
         // 模糊查询
-        if (employee.getFirstName().trim().length() != 0) {
-            employee.setFirstName("%" + employee.getFirstName() +"%");
-        }
-        if (employee.getLastName().trim().length() != 0) {
-            employee.setLastName("%" + employee.getLastName() +"%");
+        if (employee.getRealName().trim().length() != 0) {
+            employee.setRealName("%" + employee.getRealName() +"%");
         }
 
         List<EmployeesResult> list = dao.find(employee);

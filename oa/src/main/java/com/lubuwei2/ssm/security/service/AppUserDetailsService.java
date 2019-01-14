@@ -28,7 +28,7 @@ public class AppUserDetailsService implements UserDetailsService, Serializable {
     @Override
     @Cacheable(value = "securityInfo")
     public UserDetails loadUserByUsername(String mobile) throws UsernameNotFoundException {
-        List<FindResult> list = securityDao.findByMobile(new User(mobile));
+        List<FindResult> list = null;
         int size = list.size();
         if (size == 0 || size > 1) {
             throw new UsernameNotFoundException("记录" + mobile + "不存在");

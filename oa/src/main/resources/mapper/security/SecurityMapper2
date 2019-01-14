@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lubuwei2.ssm.modules.security.SecurityDao">
+    <!--result map-->
+    <resultMap id="BasicResult" type="com.lubuwei2.ssm.entity.Account">
+        <id column="aid" property="aid" jdbcType="BIGINT" />
+        <id column="eid" property="eid" jdbcType="BIGINT" />
+        <id column="username" property="username" jdbcType="VARCHAR"/>
+        <id column="password" property="password" jdbcType="VARCHAR"/>
+        <id column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <id column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--cell-->
+    <sql id="cell">
+        aid, eid, username, create_time, last_login_time
+    </sql>
+    <!--table-->
+    <sql id="table">
+        accounts
+    </sql>
+    <!--find-->
+    <select id="find" parameterType="Account" resultMap="BasicResult">
+        select
+        <include refid="cell"/>
+        from
+        <include refid="table"/>
+        <where>
+            is_delete = 0
+            <if test="mobile != null and mobile != ''">
+                AND mobile = #{mobile}
+            </if>
+        </where>
+    </select>
+    <!--findByMobile-->
+    <select id="findByMobile" parameterType="Account" resultMap="BasicResult">
+        select
+        <include refid="cell"/>
+        from
+        <include refid="table"/>
+        where mobile = #{mobile} and is_delete = 0
+    </select>
+    <!--save-->
+    <insert id="save" parameterType="Account" useGeneratedKeys="true"
+            keyProperty="uid">
+        insert into
+        <include refid="table"/>
+        (real_name, mobile, email, password, create_time)
+        values
+        (#{realName}, #{mobile}, #{email}, #{password}, #{createTime})
+    </insert>
+    <!--findByMobile-->
+    <select id="findByMobileAndPassword" parameterType="Account" resultMap="BasicResult">
+        select
+        <include refid="cell"/>
+        from
+        <include refid="table"/>
+        where mobile = #{mobile} and password = #{password} and is_delete = 0
+    </select>
+    <!--updateByMobileAndPassword-->
+    <update id="updateByMobileAndPassword" parameterType="Account">
+        update
+        <include refid="table"/>
+        <set>
+            <if test="lastLoginTime != null">last_login_time = #{lastLoginTime}</if>
+        </set>
+        where mobile = #{mobile} and password = #{password} and is_delete = 0
+    </update>
+</mapper>

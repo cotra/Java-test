@@ -1,9 +1,7 @@
 package com.lubuwei2.ssm.modules.security;
 
-import com.lubuwei2.ssm.domain.BasicMapper;
-import com.lubuwei2.ssm.domain.FindMapper;
-import com.lubuwei2.ssm.entity.User;
-import com.lubuwei2.ssm.modules.security.dto.FindResult;
+import com.lubuwei2.ssm.entity.Account;
+import com.lubuwei2.ssm.modules.security.dto.LoginResult;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -11,13 +9,16 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface SecurityDao extends BasicMapper<User>, FindMapper<User, FindResult> {
-    // 根据手机查找
-    List<FindResult> findByMobile(User user);
+public interface SecurityDao {
+    // 根据eid和密码更新
+    Integer updateByEidAndPwd(Account account);
 
-    // 根据手机号和密码
-    List<FindResult> findByMobileAndPassword(User user);
+    // 根据username和密码更新
+    Integer updateByUsernameAndPwd(Account account);
 
-    // 根据手机号和密码更新
-    Integer updateByMobileAndPassword(User user);
+    // 登录成功后返回
+    List<LoginResult> findAfterLoginByEid(Long eid);
+
+    // 登录成功后返回
+    List<LoginResult> findAfterLoginByUsername(String username);
 }

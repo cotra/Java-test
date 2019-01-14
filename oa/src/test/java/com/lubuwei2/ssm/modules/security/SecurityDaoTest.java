@@ -1,8 +1,9 @@
 package com.lubuwei2.ssm.modules.security;
 
-import com.lubuwei2.ssm.entity.User;
+import com.lubuwei2.ssm.entity.Account;
 import com.lubuwei2.ssm.utils.MD5Utils;
 import com.lubuwei2.ssm.utils.TimeUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,22 @@ public class SecurityDaoTest {
     SecurityDao dao;
 
     @Test
+    public void updateByEidAndPwd() {
+        Account account = new Account();
+        account.setEid(10L);
+        account.setPassword(MD5Utils.toMD5("123456"));
+        account.setLastLoginTime(TimeUtils.letDateToSqlTimestamp());
+        Integer update = dao.updateByEidAndPwd(account);
+        Assert.assertNotNull(update);
+    }
+
+    @Test
     public void updateByMobileAndPassword() {
-        User user = new User();
-        user.setMobile("15012345678");
-        user.setPassword(MD5Utils.toMD5("123456"));
-        user.setLastLoginTime(TimeUtils.letDateToSqlTimestamp());
-        Integer update = dao.updateByMobileAndPassword(user);
-        System.out.println(update);
-//        assertNotNull(list);
+        Account account = new Account();
+        account.setUsername("super");
+        account.setPassword(MD5Utils.toMD5("123456"));
+        account.setLastLoginTime(TimeUtils.letDateToSqlTimestamp());
+        Integer update = dao.updateByUsernameAndPwd(account);
+        Assert.assertNotNull(update);
     }
 }

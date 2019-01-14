@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lubuwei2.ssm.dao.PublicEmployeesDao">
+    <!--result map-->
+    <resultMap id="BasicResult" type="com.lubuwei2.ssm.entity.Employee">
+        <id column="eid" property="eid" jdbcType="BIGINT"/>
+    </resultMap>
+    <!--cell-->
+    <sql id="cell">
+      eid
+    </sql>
+    <!--table-->
+    <sql id="table">employees</sql>
+    <!--findByFlag-->
+    <select id="findByFlag" parameterType="String" resultMap="BasicResult">
+        SELECT <include refid="cell"/> FROM <include refid="table"/>
+        <where>
+            (emp_no=#{flag} OR mobile=#{flag}) AND is_delete = 0
+        </where>
+    </select>
+</mapper>

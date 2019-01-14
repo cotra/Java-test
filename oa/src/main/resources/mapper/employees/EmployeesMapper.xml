@@ -4,31 +4,31 @@
 <mapper namespace="com.lubuwei2.ssm.modules.employees.EmployeesDao">
     <!--result map-->
     <resultMap id="BasicResult" type="com.lubuwei2.ssm.modules.employees.dto.EmployeesResult">
-        <id column="emp_no" property="empNo" jdbcType="VARCHAR" />
-        <id column="birth_date" property="birthDate" jdbcType="DATE"/>
-        <id column="first_name" property="firstName" jdbcType="VARCHAR"/>
-        <id column="last_name" property="lastName" jdbcType="VARCHAR"/>
-        <id column="gender" property="gender" jdbcType="INTEGER"/>
-        <id column="hire_date" property="hireDate" jdbcType="DATE"/>
         <id column="eid" property="eid" jdbcType="BIGINT"/>
+        <id column="emp_no" property="empNo" jdbcType="VARCHAR" />
+        <id column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <id column="birth_date" property="birthDate" jdbcType="DATE"/>
+        <id column="gender" property="gender" jdbcType="INTEGER"/>
+        <id column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <id column="hire_date" property="hireDate" jdbcType="DATE"/>
     </resultMap>
     <!--cell-->
     <sql id="cell">
-        emp_no, birth_date, first_name, last_name, gender, hire_date, eid
+      eid, emp_no, real_name, birth_date, gender, hire_date
     </sql>
     <!--table-->
     <sql id="table">employees</sql>
     <!--save-->
     <insert id="save" parameterType="Employee" useGeneratedKeys="true" keyProperty="eid">
         insert into <include refid="table"/>
-        (emp_no, birth_date, first_name, last_name, gender, hire_date)
+        (emp_no, real_name, birth_date, gender, mobile, hire_date)
         values
-        (#{empNo}, #{birthDate}, #{firstName}, #{lastName}, #{gender}, #{hireDate})
+        (#{empNo}, #{realName}, #{birthDate}, #{gender}, #{mobile}, #{hireDate})
     </insert>
     <!--saveBatch-->
     <insert id="saveBatch" parameterType="List" useGeneratedKeys="true" keyProperty="eid">
         INSERT INTO <include refid="table"/>
-        (emp_no, birth_date, first_name, last_name, gender, hire_date)
+        (emp_no, real_name, birth_date, gender, mobile, hire_date)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.empNo}, #{item.birthDate}, #{item.firstName}, #{item.lastName}, #{item.gender}, #{item.hireDate})

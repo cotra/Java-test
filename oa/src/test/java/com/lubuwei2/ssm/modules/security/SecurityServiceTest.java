@@ -21,11 +21,11 @@ public class SecurityServiceTest {
 
     @Test
     public void login() {
-        User user = new User();
-        user.setMobile("15012345678");
-        user.setPassword("123456");
-        
-        Login login = service.login(user);
-        System.out.println(login.getFlag());
+//        User user = new User();
+//        user.setMobile("15012345678");
+//        user.setPassword("123456");
+//
+//        Login login = service.login(null);
+//        System.out.println(login.getFlag());
     }
 }
