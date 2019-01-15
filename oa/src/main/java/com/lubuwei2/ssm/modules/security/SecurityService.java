@@ -47,7 +47,7 @@ class SecurityService {
      * 判断是手机号码or账户or员工号并登录
      */
     public Login login(String flag, String pwd) {
-        // 手机或者员工号
+        // 纯数字, 手机or工号
         if(RegexUtils.checkDigit(flag)) {
             return loginByEid(flag, pwd);
         }
@@ -56,7 +56,39 @@ class SecurityService {
     }
 
     /**
-     * 可能是手机号码or账户
+     * 账户名登录
+     */
+//    @CacheEvict(value = "securityInfo", allEntries=true)
+    private Login loginByUsername(String flag, String password) {
+        // dto
+        Login dto = new Login();
+        // 修改登录时间
+        Account account = new Account(flag, MD5Utils.toMD5(password), TimeUtils.letDateToSqlTimestamp());
+        Integer update = dao.updateByUsernameAndPwd(account);
+        if(update == 1) {
+            List<LoginRes> login = dao.findAfterLoginByUsername(flag);
+            if(login.size() == 0) {
+                dto.setFlag(Flag.NO_EMPLOYEE);
+                return dto;
+            }
+            if(login.size() > 1) {
+                dto.setFlag(Flag.USER_MORE_ONE);
+                return dto;
+            }
+            if(login.size() == 1) {
+                dto.setFlag(Flag.OK);
+                dto.setRes(login.get(0));
+                return dto;
+            }
+        } else {
+            dto.setFlag(Flag.ACCOUNT_OR_PASSWORD_ERROR);
+            return dto;
+        }
+        return dto;
+    }
+
+    /**
+     * 手机号码or工号登录
      */
     private Login loginByEid(String flag, String password) {
         Login dto = new Login();
@@ -78,37 +110,6 @@ class SecurityService {
         // 修改成功,连表查询返回信息
         if(update == 1) {
             List<LoginRes> login = dao.findAfterLoginByEid(eid);
-            if(login.size() == 0) {
-                dto.setFlag(Flag.NO_EMPLOYEE);
-                return dto;
-            }
-            if(login.size() > 1) {
-                dto.setFlag(Flag.USER_MORE_ONE);
-                return dto;
-            }
-            if(login.size() == 1) {
-                dto.setFlag(Flag.OK);
-                dto.setRes(login.get(0));
-                return dto;
-            }
-        } else {
-            dto.setFlag(Flag.ACCOUNT_OR_PASSWORD_ERROR);
-            return dto;
-        }
-        return dto;
-    }
-
-    // 使用username登录
-//    @CacheEvict(value = "securityInfo", allEntries=true)
-    private Login loginByUsername(String flag, String password) {
-        // dto
-        Login dto = new Login();
-
-        // 修改登录时间
-        Account account = new Account(flag, MD5Utils.toMD5(password), TimeUtils.letDateToSqlTimestamp());
-        Integer update = dao.updateByUsernameAndPwd(account);
-        if(update == 1) {
-            List<LoginRes> login = dao.findAfterLoginByUsername(flag);
             if(login.size() == 0) {
                 dto.setFlag(Flag.NO_EMPLOYEE);
                 return dto;
