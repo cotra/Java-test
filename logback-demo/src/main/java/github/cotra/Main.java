@@ -14,6 +14,5 @@ public class Main {
         logger.info("logback日志 info");
         logger.warn("logback日志 warn");
         logger.error("logback日志 error");
-
     }
 }

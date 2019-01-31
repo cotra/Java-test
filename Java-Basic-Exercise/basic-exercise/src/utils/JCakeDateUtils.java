@@ -6,12 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * ���ڴ�������
- * @author jiang.li
- * @date 2013-12-18 11:22
- */
-public class DateUtils {
+public class JCakeDateUtils {
 	
 	/**���峣��**/
 	public static final String DATE_FULL_STR = "yyyy-MM-dd HH:mm:ss";
